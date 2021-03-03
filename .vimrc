@@ -7,7 +7,7 @@ set ruler
 set cul
 set spell
 let g:tex_indent_brace=0
-"set clipboard=unnamed
+set clipboard=unnamed
 "cd /media/prasanna/Data/Documents/Latex/
 
 filetype off
