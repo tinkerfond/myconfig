@@ -9,7 +9,7 @@ read REPLY
 if [ $REPLY = "yes" ]
 then
   myconfig=${PWD##*/}
-  rsync -av --link-dest=../myconfig/ --exclude-from 'EXCLUSION' ../myconfig/ ../
+  rsync -av --exclude-from='EXCLUSION' --link-dest=./ ./ ../
 else
   echo Aborted
   exit 0
