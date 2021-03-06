@@ -1,6 +1,6 @@
-EXCLUSION.txt
+EXCLUSION
 initcfg.sh
-LICENSE.txt
+LICENSE
 README.md
 *.swp
 .git
