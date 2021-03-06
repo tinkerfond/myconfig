@@ -6,7 +6,7 @@ echo
 echo "Deploying this configuration will OVERWRITE YOUR EXISTING CONFIGURATION"
 echo -n "Are you sure? 'yes' or 'no':"
 read REPLY
-if [[ $REPLY == "yes" ]]; then
+if $REPLY == "yes"; then
   localreponame=${PWD##*/}
   rsync -av --link-dest=../$localreponame ../$localreponame/ ../
 else
