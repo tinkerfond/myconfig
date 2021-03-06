@@ -8,8 +8,7 @@ echo -n "Are you sure? 'yes' or 'no':"
 read REPLY
 if [ $REPLY = "yes" ]
 then
-  myconfig=${PWD##*/}
-  rsync -av --exclude-from='EXCLUSION' --link-dest=./ ./ ../
+  rsync -av --exclude-from='EXCLUSION' --link-dest=$PWD ./ ../
 else
   echo Aborted
   exit 0
