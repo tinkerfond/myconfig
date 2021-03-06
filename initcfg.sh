@@ -9,7 +9,7 @@ read REPLY
 if [ $REPLY = "yes" ]
 then
   localreponame=${PWD##*/}
-  rsync -av --link-dest=../$localreponame ../$localreponame/ ../
+  rsync -av --exclude="EXCLUDE.txt" --link-dest=../$localreponame ../$localreponame/ ../
 else
   echo Aborted
   exit 0
