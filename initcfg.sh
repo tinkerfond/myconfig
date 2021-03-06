@@ -8,8 +8,8 @@ echo -n "Are you sure? 'yes' or 'no':"
 read REPLY
 if [ $REPLY = "yes" ]
 then
-  localreponame=${PWD##*/}
-  rsync -av --exclude="EXCLUDE.txt" --link-dest=../$localreponame ../$localreponame/ ../
+  myconfig=${PWD##*/}
+  rsync -av --exclude-from="EXCLUDE.txt" --link-dest=../myconfig ../myconfig/ ../
 else
   echo Aborted
   exit 0
