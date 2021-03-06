@@ -1,0 +1,7 @@
+EXCLUSION.txt
+initcfg.sh
+LICENSE.txt
+README.md
+*.swp
+.git
+
