@@ -1,0 +1,1006 @@
+priority 0
+#Preamble-----------start--------------------------------
+snippet templ "Template" 
+\\documentclass{article}
+\\usepackage[utf8]{inputenc}
+\\usepackage{mathtools}
+\\usepackage{amssymb}
+\\usepackage{breqn}
+\\usepackage{euscript}
+\\usepackage{mathrsfs}
+\\usepackage{enumitem}
+%\\usepackage{csquotes}
+\\usepackage[colorlinks]{hyperref}
+%\\usepackage{blindtext}
+
+\\usepackage{geometry}
+\\geometry{a4paper, portrait, margin=1.37in}
+
+%\\usepackage[many]{tcolorbox}
+%\\newtcolorbox{mybox5}{colback=blue!9!white,colframe=white!60!blue,breakable,enhanced jigsaw}
+
+%\\usepackage{lastpage}
+%\\usepackage{fancyhdr}
+%\\usepackage{lipsum} % just for mock text
+
+%\\pagestyle{fancy}
+%\\fancyfoot[C]{\thepage\ of \pageref{LastPage}}
+%\\renewcommand{\headrulewidth}{0.4pt}% default is 0pt
+%\\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+%\\fancypagestyle{plain}{%
+%\\fancyfoot[C]{\thepage\ of \pageref{LastPage}}}
+%\\pagestyle{plain}
+%\\lhead{}
+%\\rhead{}
+%\\chead{}
+
+%\\numberwithin{equation}{section}
+%\\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\\title{${1:TITLE}}
+\\author{${2:P.Prasanna Venkatesan}}
+\\date{$3}
+
+\\begin{document}
+\\maketitle
+
+$4
+\\end{document}
+endsnippet
+
+#newcommand
+snippet dc "document class" b
+\\documentclass${2:[${3:a4paper}]}{${1:article}} ${0}
+endsnippet
+snippet nc "newcommand" b
+\\newcommand{\\${1:cmd}}[${2:opt}]{${3:realcmd}} ${0}
+endsnippet
+#usepackage
+snippet up "\usepackage" b
+\\usepackage${2:[${3:option}]}{${1:package}} ${0}
+endsnippet
+#newunicodechar
+snippet nuc "\newunicodechar" b
+\\newunicodechar{${1}}{${2:\\ensuremath}${3:tex-substitute}}} ${0}
+endsnippet
+#DeclareMathOperator
+snippet dmo "\DeclareMathOperator" b
+\\DeclareMathOperator{${1}}{${2}} ${0}
+endsnippet
+#Nextline
+
+#Preamble------------end---------------------------------
+
+#DOCUMENT------------start-------------------------------
+
+# \begin{}...\end{}
+snippet begin "\begin{}...\end{} block" bw
+\\begin{${1:env}}
+	${0:${VISUAL}}
+\\end{$1}
+endsnippet
+# Tabular
+snippet tab "tabular (or arbitrary) environment" w
+\\begin{${1:tabular}}{${2:c}}
+${0:${VISUAL}}
+\\end{$1}
+endsnippet
+snippet thm "thm (or arbitrary) environment with optional argument"
+\\begin[${1:author}]{${2:thm}}
+${0:${VISUAL}}
+\\end{$2}
+endsnippet
+snippet center "center environment"
+\\begin{center}
+${0:${VISUAL}}
+\\end{center}
+endsnippet
+# Align(ed)
+snippet ali "align(ed) environment"
+\\begin{align${1:ed}}
+${0:${VISUAL}}
+\\end{align$1}
+endsnippet
+# Gather(ed)
+snippet gat "gather(ed) environment"
+\\begin{gather${1:ed}}
+${0:${VISUAL}}
+\\end{gather$1}
+endsnippet
+# Equation
+snippet eq "equation environment" w
+\\begin{equation}
+${0:${VISUAL}}
+\\end{equation}
+endsnippet
+
+# Equation
+snippet eql "Labeled equation environment" w
+\\begin{equation}
+\\label{eq:${2}}
+${0:${VISUAL}}
+\\end{equation}
+endsnippet
+# Equation
+snippet eq* "unnumbered equation environment"
+\\begin{equation*}
+${0:${VISUAL}}
+\\end{equation*}
+endsnippet
+# Unnumbered Equation
+snippet \ "unnumbered equation: \[ ... \]"
+\\[
+${0:${VISUAL}}
+\\]
+endsnippet
+# Mathmode
+snippet mm "\[...\]" bA
+\\[${0:${VISUAL}}\\]
+endsnippet
+# Inline equation
+snippet i "Inline mathmode" w
+\$${1:${VISUAL}}\$ $0
+endsnippet
+# Equation array
+snippet eqnarray "eqnarray environment"
+\\begin{eqnarray}
+${0:${VISUAL}}
+\\end{eqnarray}
+endsnippet
+
+# Label
+snippet lab \label
+\\label{${1:eq:}${2:fig:}${3:tab:}${0}}
+endsnippet
+
+# Enumerate
+snippet enum "enumerate environment"
+\\begin{enumerate}
+\\item ${0}
+\\end{enumerate}
+endsnippet
+snippet enuma "enumerate environment"
+\\begin{enumerate}[(a)]
+\\item ${0}
+\\end{enumerate}
+endsnippet
+snippet enumi "enumerate environment"
+\\begin{enumerate}[(i)]
+\\item ${0}
+\\end{enumerate}
+endsnippet
+# Itemize
+snippet item "itemize environment"
+\\begin{itemize}
+\\item ${0}
+\\end{itemize}
+endsnippet
+snippet it "\item"
+\\item ${1:${VISUAL}}
+endsnippet
+
+# Description
+snippet desc "description environment"
+\\begin{description}
+\\item[${1}] ${0}
+\\end{description}
+endsnippet
+# Endless new item
+snippet ]i "\item (recursive)"
+\\item ${1}
+${0:]i}
+endsnippet
+#Dynamic Arrays and Matrices
+post_jump "dynamicsnippet(snip)"
+snippet 'arr(\d+),(\d+)' "LaTeX array" br
+\begin{array}{`!p
+orient = ""
+for _ in range(0, int(match.group(1))): orient += "c"
+snip.rv = orient`}
+`!p
+snip.rv = create_matrix(match.group(1), match.group(2), "&", "\t", "\\\\\\\\\n")
+`$0
+\end{array}
+endsnippet
+post_jump "dynamicsnippet(snip)"
+snippet `(v|V|b|B|p|small){0,1}mat(\d+),(\d+)` "Matrix" r
+\begin{`!p snip.rv=match.group(1) if match.group(1)!=None else ""`matrix}
+`!p
+snip.rv = create_matrix(match.group(2), match.group(3), "&", "\t", "\\\\\\\\\n")
+`$0
+\end{`!p snip.rv=match.group(1) if match.group(1)!=None else ""`matrix}
+endsnippet
+# Cases
+snippet cas "cases environment"
+\\begin{cases}
+${1:equation}, &\\text{ if }${2:case}\\
+${0:${VISUAL}}
+\\end{cases}
+endsnippet
+# Split
+snippet spl "split environment"
+\\begin{split}
+${0:${VISUAL}}
+\\end{split}
+endsnippet
+# Part
+snippet part "document \part"
+\\part{${1:part name}} % (fold)%
+\\label{prt:${2:$1}}
+${0}
+% part $2 (end)
+endsnippet
+# Chapter
+snippet chp "\chapter"
+\\chapter{${1:chapter name}}%$2
+${0}
+endsnippet
+# Section
+snippet sec "\section"
+\\section{${1:section name}}%$2
+${0}
+endsnippet
+# Section without number
+snippet sec* "\section*"
+\\section*{${1:section name}}%$2
+${0}
+endsnippet
+# Sub Section
+snippet sub "\subsection"
+\\subsection{${1:subsection name}}%$2
+${0}
+endsnippet
+# Sub Section without number
+snippet sub* "\subsection*"
+\\subsection*{${1:subsection name}}%$2
+${0}
+endsnippet
+# Sub Sub Section
+snippet ssub "\subsubsection"
+\\subsubsection{${1:subsubsection name}}%$2
+${0}
+endsnippet
+# Sub Sub Section without number
+snippet ssub* "\subsubsection*"
+\\subsubsection*{${1:subsubsection name}%$2
+${0}
+endsnippet
+# Paragraph
+snippet par "\paragraph"
+\\paragraph{${1:paragraph name}}%$2
+${0}
+endsnippet
+# Sub Paragraph
+snippet subp "\subparagraph"
+\\subparagraph{${1:subparagraph name}}%$2
+${0}
+endsnippet
+snippet ni "\noindent"
+\\noindent
+${0}
+endsnippet
+#Newpage
+snippet newp "New Page" w
+\\newpage
+endsnippet
+#References
+snippet itd "description \item"
+\\item[${1:description}] ${0:item}
+endsnippet
+snippet figure "reference to a figure"
+${1:Figure}~\\ref{${2:fig:}}
+endsnippet
+snippet table "reference to a table"
+${1:Table}~\\ref{${2:tab:}}
+endsnippet
+snippet listing "reference to a listing"
+${1:Listing}~\\ref{${2:list}}
+endsnippet
+snippet section "reference to a section"
+${1:Section}~\\ref{sec:${2}} ${0}
+endsnippet
+snippet page "reference to a page"
+${1:page}~\\pageref{${2}} ${0}
+endsnippet
+snippet index "\index"
+\\index{${1:index}} ${0}
+endsnippet
+
+#Citations
+snippet citen "\citen"
+\\citen{${1}} ${0}
+endsnippet
+
+# natbib citations
+snippet citep "\citep"
+\\citep{${1}} ${0}
+endsnippet
+snippet citet "\citet"
+\\citet{${1}} ${0}
+endsnippet
+snippet cite "\cite[]{}"
+\\cite[${1}]{${2}} ${0}
+endsnippet
+snippet citea "\citeauthor"
+\\citeauthor{${1}} ${0}
+endsnippet
+snippet citey "\citeyear"
+\\citeyear{${1}} ${0}
+endsnippet
+snippet fcite "\footcite[]{}"
+\\footcite[${1}]{${2}}${0}
+endsnippet
+
+#Formating text: italic, bold, underline, small capital, emphasise ..
+snippet ita "italic text" w
+\\textit{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet bf "bold face text" w
+\\textbf{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet bs "Bold symbol" w
+\\boldsymbol{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet mb "Math Bold" w
+\\mathbf{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet ul "underline text" w
+\\underline{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet ol "overline text" w
+\\overline{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet emp "emphasize text" w
+\\emph{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet sc "small caps text" w
+\\textsc{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet os "overset" w
+\\overset{$1}{$2} $0
+endsnippet
+snippet us "underset" w
+\\underset{$1}{$2} $0
+endsnippet
+snippet _ "subscript" iA
+_{$1}$0
+endsnippet
+snippet ^ "superscript" iA
+^{$1}$0
+endsnippet
+#Choosing font
+snippet sf "sans serife text"
+\\textsf{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet rm "roman font text"
+\\textrm{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet tt "typewriter (monospace) text"
+\\texttt{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet tsub "subscripted text"
+\\textsubscript{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet tsup "superscripted text"
+\\textsuperscript{${1:${VISUAL:text}}}${0}
+endsnippet
+
+#Math font
+snippet mf "mathfrak" i
+\\mathfrak{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet mc "mathcal" i
+\\mathcal{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet ms "mathscr" i
+\\mathscr{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet mbb "mathbb" i
+\\mathbb{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet mk "Math" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$2
+endsnippet
+#misc
+snippet ft "\footnote"
+\\footnote{${1:${VISUAL:text}}}${0}
+endsnippet
+snippet fig "figure environment (includegraphics)"
+\\begin{figure}
+\\begin{center}
+\\includegraphics[scale=${1}]{Figures/${2}}
+\\end{center}
+\\caption{${3}}
+\\label{fig:${4}}
+\\end{figure}
+${0}
+endsnippet
+snippet tikz "figure environment (tikzpicture)"
+\\begin{figure}[htpb]
+\\begin{center}
+\\begin{tikzpicture}[scale=${1:1}, transform shape]
+${2}
+\\end{tikzpicture}
+\\end{center}
+\\caption{${3}}%
+\\label{fig:${4}}
+\\end{figure}
+${0}
+endsnippet
+snippet subfig "subfigure environment"
+\\begin{subfigure}[${1}]{${2:\\textwidth}}
+\\begin{center}
+${3}
+\\end{center}
+\\caption{${4}}
+\\label{fig:${5}}
+\\end{subfigure}
+${0}
+endsnippet
+snippet tikzcd "tikzcd environment in equation"
+\\begin{equation}
+\\begin{tikzcd}
+${1}
+\\end{tikzcd}
+\\end{equation}
+${0}
+endsnippet
+snippet tikzcd* "tikzcd environment in equation*"
+\\begin{equation*}
+\\begin{tikzcd}
+${1}
+\\end{tikzcd}
+\\end{equation*}
+${0}
+endsnippet
+
+snippet frame "frame environment"
+\\begin{frame}[${1:t}]
+\frametitle{${2:title}}
+\framesubtitle{${3:subtitle}}
+${0:${VISUAL}}
+\\end{frame}
+endsnippet
+snippet block "block environment"
+\\begin{block}{${1:title}}
+${0:${VISUAL}}
+\\end{block}
+endsnippet
+snippet alert "alert text"
+\\alert{${1:${VISUAL:text}}} ${0}
+endsnippet
+snippet alertblock "alertblock environment"
+\\begin{alertblock}{${1:title}}
+${0:${VISUAL}}
+\\end{alertblock}
+endsnippet
+snippet example "exampleblock environment"
+\\begin{exampleblock}{${1:title}}
+${0:${VISUAL}}
+\\end{exampleblock}
+endsnippet
+snippet col2 "two-column environment"
+\\begin{columns}
+\\begin{column}{0.5\\textwidth}
+${1}
+\\end{column}
+\\begin{column}{0.5\\textwidth}
+${0}
+\\end{column}
+\\end{columns}
+endsnippet
+snippet multicol2 "two-column environment with multicol"
+\\begin{multicols}{2}
+${1}
+\columnbreak
+${0}
+\\end{multicols}
+endsnippet
+#Code listings
+snippet lst
+\\begin{listing}[language=${1:language}]
+${0:${VISUAL}}
+\\end{listing}
+endsnippet
+snippet lsi
+\\lstinline|${1}| ${0}
+endsnippet
+#Includegraphics
+snippet incg "includegraphics" w
+\\includegraphics${2:[$3]}{$1}
+endsnippet
+
+#Hyperlinks----------start-------------------------------
+
+#url
+snippet url
+\\url{${1}} ${0}
+endsnippet
+#href
+snippet href
+\\href{${1}}{${2}} ${0}
+endsnippet
+# URL from Clipboard.
+snippet urlc
+\\url{`@+`} ${0}
+endsnippet
+#hrefc
+snippet hrefc
+\\href{`@+`}{${1}} ${0}
+endsnippet
+# enquote from package csquotes
+snippet enq "enquote"
+\\enquote{${1:${VISUAL:text}}} ${0}
+endsnippet
+
+#Hyperlinks----------end---------------------------------
+
+#Greekletters--------start-------------------------------
+
+#Lowercase
+snippet ga "alpha" w
+\\alpha $0
+endsnippet
+snippet gb "beta" w
+\\beta $0
+endsnippet
+snippet gg "gamma" w
+\\gamma $0
+endsnippet
+snippet gd "delta" w
+\\delta $0
+endsnippet
+snippet ge "epsilon" w
+\\epsilon $0
+endsnippet
+snippet gz "zeta" w
+\\zeta $0
+endsnippet
+snippet eta "eta" w
+\\eta $0
+endsnippet
+snippet gt "theta" w
+\\theta $0
+endsnippet
+snippet gi "iota" w
+\\iota $0
+endsnippet
+snippet gk "kappa" w
+\\kappa $0
+endsnippet
+snippet gl "lambda" w
+\\lambda $0
+endsnippet
+snippet gm "mu" w
+\\mu $0
+endsnippet
+snippet gn "nu" w
+\\nu $0
+endsnippet
+snippet gx "xi" w
+\\xi $0
+endsnippet
+snippet o "o" w
+o $0
+endsnippet
+snippet pi "pi" w
+\\pi $0
+endsnippet
+snippet gr "rho" w
+\\rho $0
+endsnippet
+snippet gs "sigma" w
+\\sigma $0
+endsnippet
+snippet gt "tau" w
+\\tau $0
+endsnippet
+snippet gu "upsilon" w
+\\upsilon $0
+endsnippet
+snippet gf "phi" w
+\\phi $0
+endsnippet
+snippet gc "chi" w
+\\chi $0
+endsnippet
+snippet gps "psi" w
+\\psi $0
+endsnippet
+snippet go "omega" w
+\\omega $0
+endsnippet
+
+#Uppercase
+
+snippet Gg "Gamma" w
+\\Gamma $0
+endsnippet
+snippet Gd "Delta" w
+\\Delta $0
+endsnippet
+snippet Gt "Theta" w
+\\Theta $0
+endsnippet
+snippet Gl "Lambda" w
+\\Lambda $0
+endsnippet
+snippet Gx "Xi" w
+\\Xi $0
+endsnippet
+snippet Pi "Pi" w
+\\Pi $0
+endsnippet
+snippet Gs "Sigma" w
+\\Sigma $0
+endsnippet
+snippet Gu "Upsilon" w
+\\Upsilon $0
+endsnippet
+snippet Gf "Phi" w
+\\Phi $0
+endsnippet
+snippet Gps "Psi" w
+\\Psi $0
+endsnippet
+snippet Go "Omega" w
+\\Omega $0
+endsnippet
+
+#Variable greek
+snippet gve "varepsilon" w
+\\varepsilon$0
+endsnippet
+snippet gvt "vartheta" w
+\\vartheta$0
+endsnippet
+snippet vp "varphi" w
+\\varphi$0
+endsnippet
+
+#Greekletters--------end---------------------------------
+
+#Mathsnippets--------start-------------------------------
+
+# Delimiter
+snippet lr "left right" w
+\\left${1} ${0:${VISUAL}} \\right${1}
+endsnippet
+snippet lr( "left( right)" w
+\\left( ${0:${VISUAL}} \\right)
+endsnippet
+snippet lr| "left| right|" w
+\\left| ${0:${VISUAL}} \\right|
+endsnippet
+snippet lr{ "left\{ right\}" w
+\\left\\{ ${0:${VISUAL}} \\right\\}
+endsnippet
+snippet lr[ "left[ right]" w
+\\left[ ${0:${VISUAL}} \\right]
+endsnippet
+snippet lra "langle rangle" w
+\\langle ${0:${VISUAL}} \\rangle
+endsnippet
+snippet lrc "lceil rceil" w
+\\left\\lceil ${0:${VISUAL}} \\right\\rceil
+endsnippet
+snippet lrf "lflooe rfloor" w
+\\left\\lfloor ${0:${VISUAL}} \\right\\rfloor
+endsnippet
+
+# Mathcommands,Functions,Operators
+snippet stackrel "\stackrel{}{}"
+\\stackrel{${1:above}}{${2:below}} ${0}
+endsnippet
+snippet `sq([a-zA-Z0-9_\{}+-^]*)` "Square root" rw
+\\sqrt{`!p snip.rv=match.group(1)`}$0
+endsnippet
+snippet '(\w)sq([a-zA-Z0-9_\{}+-^]*)' "nsq" rw
+\\sqrt[`!p snip.rv=match.group(1)`]{`!p snip.rv=match.group(2)`$1}$0
+endsnippet
+snippet fra "\frac{}{}" w
+\\frac{${1:num}}{${2:denom}}${0}
+endsnippet
+snippet `([()a-zA-Z0-9_\{}+-^])fra([()a-zA-Z0-9_\{}+-^])` "compfrac" rw
+\\frac{`!p snip.rv=match.group(1)`}{`!p snip.rv=match.group(2)`}
+endsnippet
+snippet dfra "\dfrac{}{}" wA
+\\dfrac{${1:num}}{${2:denom}}${0}
+endsnippet
+snippet tfra "\tfrac{}{}" wA
+\\tfrac{${1:num}}{${2:denom}}${0}
+endsnippet
+snippet sum "\sum^{}_{}" i
+\\sum^{${1:n}}_{${2:i=1}} ${0}
+endsnippet
+snippet `([a-zA-Z0-9_\{}+-^]{0,10})lim([a-zA-Z0-9_\{}+-^]{0,10})` "\lim_{}" wr
+\\lim_{`!p snip.rv=match.group(1)` \\to`!p snip.rv=match.group(2)`}
+endsnippet
+snippet `([a-zA-Z0-9_\{}+-^])fun([a-zA-Z0-9_\{}+-^])` "function" rw
+${1:f}: {`!p snip.rv=match.group(1)` \to `!p snip.rv=match.group(2)`} $0
+endsnippet
+priority 1
+snippet der "d/dx operator" w
+\\frac{d $2}{d ${1:x}} $0
+endsnippet
+priority 2
+snippet pder "Partial derivative" w
+\\frac{\\partial $2}{\\partial ${1:x}} $0
+endsnippet
+priority 0
+snippet `(\w*)der(\w*)` "nth d/dx operator" wr
+\\frac{d`!p snip.rv=findSum(match.group(2))` `!p snip.rv=match.group(1)`}{`!p snip.rv=printd("d",match.group(2))`} $0
+endsnippet
+priority 1
+snippet `(\w*)pder(\w*)` "Dynamic Partial Derivative" wr
+\\frac{\\partial`!p snip.rv=findSum(match.group(2))` `!p snip.rv=match.group(1)`}{`!p snip.rv=printd("\\partial",match.group(2))`} $0
+endsnippet
+snippet int "Integral" w
+\\int $0
+endsnippet
+snippet intl "Integral with limits" wA
+\\int_{$1}^{$2} $0
+endsnippet
+snippet oint "Circular Integral" w
+\\oint $0
+endsnippet
+snippet ointl "Circular Integral with limits" wA
+\\oint_{$1} $0
+endsnippet
+snippet oi "Open interval" w
+($1,$2) $0
+endsnippet
+snippet ci "Closed interval" w
+[$1,$2] $0
+endsnippet
+snippet `([a-zA-Z0-9_\{}+-^])oi([a-zA-Z0-9_\{}+-^])` "Open interval" ri
+(`!p snip.rv=match.group(1)`,`!p snip.rv=match.group(2)`)
+endsnippet
+snippet `([a-zA-Z0-9_\{}+-^])ci([a-zA-Z0-9_^\{}+-^])` "Closed interval" ri
+[`!p snip.rv=match.group(1)`,`!p snip.rv=match.group(2)`]
+endsnippet
+snippet `sinf(([a-zA-Z0-9_\{}+-^]*))` "sinfunction" rw
+\\sin{(`!p snip.rv=match.group(1)`$1)} $0
+endsnippet
+snippet `cosf(([a-zA-Z0-9_\{}+-^]*))` "cos function" rw
+\\cos{(`!p snip.rv=match.group(1)`$1)} $0
+endsnippet
+snippet `tanf([a-zA-Z0-9_\{}+-^]*)` "tan function" rw
+\\tan{(`!p snip.rv=match.group(1)`$1)} $0
+endsnippet
+priority 1
+snippet `(pol([a-zA-Z0-9_\{}+-^]*)` "Sum format polnomial" 
+\\sum_{${1:k}=0}^{${2:n}} {`!p snip.rv=match.group(1)`}^{${1:k}} $0
+endsnippet
+post_jump "dynamicsnippet(snip)"
+snippet `(\d*)pol([a-zA-Z0-9_\{}+-^]*)` "Polnomial of natural degree" rw
+`!p snip.rv=pol_gen(int(match.group(1)),match.group(2))`
+endsnippet
+priority 0
+snippet `(\w*)pine(\w*)` "pine" rw
+`!p snip.rv=match.group(1)` ||| `!p snip.rv=match.group(2)`
+endsnippet
+priority 5
+snippet `(\w*)pineapple(\w*)` "pine" rw
+`!p snip.rv=match.group(1)` ()()() `!p snip.rv=match.group(2)`
+endsnippet
+#Symbols------------------------------------------------
+
+#Symbols and Shapes
+snippet neg "negation" w
+\\neg
+endsnippet`!p snip.rv=match.group(1)`
+endsnippet
+snippet exi "Exists symbol" w
+\\exists
+endsnippet
+snippet nexi "Doesn't Exist symbol" w
+\\nexists
+endsnippet
+snippet fall "forall" w
+\\forall
+endsnippet
+snippet inf "Infinity" w
+\\infty
+endsnippet
+snippet ang "Angle" w
+\\angle
+endsnippet
+snippet tri "Triangle" w
+\\triangle
+endsnippet
+snippet squ "Square" w
+\\square
+endsnippet
+snippet bsqu "Blacksquare" w
+\\blacksquare
+endsnippet
+snippet === "align =" iA
+&=
+endsnippet
+
+# Operator Symbols
+snippet par "Partial" w
+\\partial
+endsnippet
+snippet nab "Nabla" w
+\\nabla
+endsnippet
+snippet `nab([dcg])` "Nabla dcg" wrA
+`!p 
+if match.group(1)=='d':
+	snip.rv="\\nabla\\cdot"
+if match.group(1)=='c':
+	snip.rv="\\vec{\\nabla}\\times"
+if match.group(1)=='g':
+	snip.rv="\\vec{\\nabla}"
+`{$1} $0
+endsnippet
+
+# Set Theoretic Symbols
+snippet set "Description" w
+\\{ $1 \\mid $2 \\} $0
+endsnippet
+snippet cset "Description" w
+\\{ $1, $2, \\cdots, $3 \\} $0
+endsnippet
+snippet pset "Description" w
+\\left( $1, $2, \\cdots, $3 \\right) $0
+endsnippet
+snippet sset "Description" w
+\\left[ $1, $2, \\cdots, $3 \\right] $0
+endsnippet
+snippet comp "Compliment" w
+\\compliment
+endsnippet
+snippet re "Real" w
+\\Re
+endsnippet
+snippet im "Imaginary" w
+\\Im
+endsnippet
+snippet sb "Subset" w
+\\subset
+endsnippet
+snippet sp "Superset" w
+\\supset
+endsnippet
+snippet u "Union" w
+\\cup
+endsnippet
+snippet ui "Intersection" w
+\\cap
+endsnippet
+snippet U "Big Union" w
+\\bigcup\\limits_{$1}^{$2} $0
+endsnippet
+snippet Ui "Big Intersection" w
+\\bigcap\\limits_{$1}^{$2} $0
+endsnippet
+
+# Mathmode accents
+snippet vec "Vector" w
+\\vec{$1} $0
+endsnippet
+snippet `vec([a-zA-Z0-9_\{}+-^]*)` "Vector auto" rw
+\\vec{`!p snip.rv=match.group(1)`} $0
+endsnippet
+snippet hat "Hat" w
+\\hat{$1} $0
+endsnippet
+snippet `hat([a-zA-Z0-9_\{}+-^]*)` "hat" rw
+\\hat{`!p snip.rv=match.group(1)`}
+endsnippet
+
+# Arrows
+snippet rar "Right arrow" w
+\\rightarrow
+endsnippet
+snippet lrar "Long right arrow" w
+\\longrightarrow
+endsnippet
+snippet lar "Left arrow" w
+\\leftarrow
+endsnippet
+snippet llar "Long left arrow" w
+\\longleftarrow
+endsnippet
+snippet lrarr "Left right arrow" w
+\\leftrightarrow
+endsnippet
+snippet llrarr "Long left right arrow" w
+\\longleftrightarrow
+endsnippet
+snippet xlar "xleftarrow" w
+\\xleftarrow{$1} $0
+endsnippet
+snippet xrar "xrightarrow" w
+\\xrightarrow{$1} $0
+endsnippet
+
+
+global !p
+#For Dynamic Tabstop Matrices
+def dynamicsnippet(snip):
+	# Create anonymous snippet body
+	anon_snippet_body = ""
+
+	# Get start and end line number of expanded snippet
+	start = snip.snippet_start[0]
+	end = snip.snippet_end[0]
+
+        # Append current line into anonymous snippet
+	for i in range(start, end + 1):
+		anon_snippet_body += snip.buffer[i]
+		anon_snippet_body += "" if i == end else "\n"
+
+	# Delete expanded snippet line till second to last line
+	for i in range(start, end):
+		del snip.buffer[start]
+
+	# Empty last expanded snippet line while preserving the line
+	snip.buffer[start] = ''
+
+	# Expand anonymous snippet
+	snip.expand_anon(anon_snippet_body)
+def pol_gen(n,xval):
+     st=""
+     for i in range(1,n+1):
+       st+="{"+f"${i}"+"}"+xval+"^{"+str(n-i+1)+"}+"
+     return st
+def findSum(str1): 
+  
+    # A temporary str1ing 
+    temp = 0
+  
+    # holds sum of all numbers 
+    # present in the str1ing 
+    Sum = 0
+    icount=0
+    # read each character in input string 
+    for ch in str1: 
+  
+        # if current character is a digit 
+        if (ch.isdigit()): 
+            Sum += int(ch) 
+            icount=icount+1
+    Sum=Sum+len(str1)-2*icount
+    if Sum==1:
+      prin=""
+    # atoi(temp.c_str1()) takes care 
+    # of trailing numbers 
+    else:
+      prin="^{"+str(Sum)+"}"
+    return prin
+def printd(str2,str1):
+  i=0
+  result = "" 
+  len(str1)
+  while i<len(str1)-1:
+    if str1[i].isalpha():
+     if str1[i+1].isdigit():
+      result = result +" "+ str2+str1[i]+"^{"+str1[i+1]+"}"
+     else:
+      result=result+" "+ str2 +" "+str1[i]
+    i=i+1 
+  if str1[len(str1)-1].isalpha():
+   result=result+" "+str2+" "+str1[len(str1)-1]
+  return result
+
+def create_matrix(cols, rows, sep, start, end):
+	res = ""
+	placeholder = 1
+	for _ in range(0, int(rows)):
+		res += start + f"${placeholder} "
+		placeholder += 1
+		for _ in range(0, int(cols) - 1):
+			res += sep + f" ${placeholder} "
+			placeholder += 1
+		res += end
+	return res[:-1]
+endglobal
