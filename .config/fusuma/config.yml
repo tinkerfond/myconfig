@@ -11,6 +11,7 @@ swipe:
       keypress:
           LEFTCTRL: 'xdotool key ctrl+super+w'
           LEFTSHIFT: 'xdotool key shift+super+w'
+          LEFTCTRL+LEFTSHIFT: 'xdotool key ctrl+shift+super+w'
 
   4:
     left: 
