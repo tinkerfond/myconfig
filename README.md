@@ -2,11 +2,11 @@
 Vim,Zathura,LaTeX configuration files....
 
 ### Configurations for:
-`vim`
-
-`zathura`
-
-`texlive`
+1. `vim`
+2. `zathura`
+3. `texlive`
+4. `fusuma`
+5. `i3`
 
 ### Dependencies:
 `rsync` (for deploying)
