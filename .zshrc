@@ -97,5 +97,13 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
- alias zshconfig="vim ~/.zshrc"
  alias ohmyzsh="cd ~/.oh-my-zsh"
+ alias yf="youtube-dl -f"
+ alias yF="youtube-dl -F"
+ alias xg="xgamma -gamma"
+ alias myconfig="cd ~/myconfig"
+ alias usnip="cd ~/.vim/plugged/vim-snippets/UltiSnips"
+ alias tsnip="vim ~/.vim/plugged/vim-snippets/UltiSnips/tex.snippets"
+ alias tmsnip="vim ~/.vim/plugged/vim-snippets/UltiSnips/texmath.snippets"
+ alias vimrc="vim ~/.vimrc"
+ alias zshrc="vim ~/.zshrc"
