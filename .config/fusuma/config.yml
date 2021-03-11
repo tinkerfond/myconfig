@@ -28,8 +28,6 @@ pinch:
   out:
     command: 'xdotool key ctrl+minus'
 tap:
-  3:
-    command: 'xdotool key shift+super+w'
   4:
     command: 'xdotool key super+s'
 threshold:

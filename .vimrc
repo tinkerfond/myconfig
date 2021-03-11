@@ -40,29 +40,29 @@ set conceallevel=2
 map <silent> <F9> :VimtexView<Enter>
 
 call plug#begin()
-Plug 'mg979/vim-visual-multi'
-Plug 'preservim/nerdtree'
-Plug 'lervag/vimtex'
+Plug 'https://github.com/mg979/vim-visual-multi.git'
+Plug 'https://github.com/preservim/nerdtree.git'
+Plug 'https://github.com/lervag/vimtex.git'
     let g:tex_flavor='latex'
     let g:vimtex_view_method='zathura'
     let g:vimtex_quickfix_mode=0
 
-Plug 'SirVer/ultisnips'
+Plug 'https://github.com/SirVer/ultisnips.git'
 
-Plug 'honza/vim-snippets'
+Plug 'https://github.com/honza/vim-snippets.git'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-Plug 'wincent/terminus'
+Plug 'https://github.com/wincent/terminus.git'
 
-Plug 'KeitaNakamura/tex-conceal.vim'
+Plug 'https://github.com/KeitaNakamura/tex-conceal.vim.git'
 let g:tex_conceal="ab mg"
-Plug 'matze/vim-tex-fold'
+Plug 'https://github.com/matze/vim-tex-fold.git'
 
-Plug 'KeitaNakamura/neodark.vim'
+Plug 'https://github.com/KeitaNakamura/neodark.vim.git'
 
-Plug '907th/vim-auto-save'
+Plug 'https://github.com/907th/vim-auto-save.git'
 "let g:auto_save_events = ["Insert Leave", "TextChanged"]
 "let g:auto_save = 0
 "au group ft_TeX
@@ -70,15 +70,13 @@ Plug '907th/vim-auto-save'
 "  au File Type TeX let b:auto_save = 1
 "au group E
 
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
+Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 
-Plug 'pandysong/ghost-text.vim'
+Plug 'https://github.com/pandysong/ghost-text.vim.git'
 
-Plug '~/.vim/plugged-manual/vis'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'https://github.com/vim-airline/vim-airline.git'
+Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 
 call plug#end()
 "Theme
