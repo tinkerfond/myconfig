@@ -13,7 +13,7 @@ filetype off
 set backspace=indent,eol,start
 
 "Previous line mirror after cursor
-inoremap <C-k> <Esc>klv$yhjpi
+noremap <C-k> <Esc>klv$yhjpi
 
 "Next line TeX
 autocmd FileType tex imap <C-d> \\<CR>
@@ -37,7 +37,7 @@ scriptencoding utf-8
 set conceallevel=2
 
 "Shows the corresponding line in PDF
-map <silent> <F9> :VimtexView<Enter>
+noremap <silent> <F9> :VimtexView<Enter>
 
 call plug#begin()
 Plug 'https://github.com/mg979/vim-visual-multi.git'
