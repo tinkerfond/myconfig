@@ -107,4 +107,5 @@ source $ZSH/oh-my-zsh.sh
  alias tmsnip="vim ~/.vim/plugged/vim-snippets/UltiSnips/texmath.snippets"
  alias vimrc="vim ~/.vimrc"
  alias zshrc="vim ~/.zshrc"
- alias vims="vim --servername"
+ alias vis="vim --servername"
+ alias yi="echo \"To download video with youtube-dl...\" && echo \"Enter the link of the video:\" && read && vurl=$REPLY && youtube-dl -F $vurl && echo \"Enter option in the format %video+%audio\" && read && youtube-dl -f $REPLY $vurl"
