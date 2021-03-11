@@ -107,3 +107,4 @@ source $ZSH/oh-my-zsh.sh
  alias tmsnip="vim ~/.vim/plugged/vim-snippets/UltiSnips/texmath.snippets"
  alias vimrc="vim ~/.vimrc"
  alias zshrc="vim ~/.zshrc"
+ alias vims="vim --servername"
