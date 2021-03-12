@@ -7,6 +7,7 @@ Vim,Zathura,LaTeX configuration files....
 3. `texlive`
 4. `fusuma`
 5. `i3`
+6. `zsh`
 
 ### Dependencies:
 `rsync` (for deploying)
