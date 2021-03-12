@@ -27,9 +27,9 @@ pinch:
     command: 'xdotool key ctrl+plus'
   out:
     command: 'xdotool key ctrl+minus'
-tap:
-  4:
-    command: 'xdotool key super+s'
+#tap:
+#  4:
+#    command: 'xdotool key super+s'
 threshold:
   swipe: 0.4
   pinch: 0.4
