@@ -109,3 +109,4 @@ source $ZSH/oh-my-zsh.sh
  alias zshrc="vim ~/.zshrc"
  alias vis="vim --servername"
  alias yi="echo \"To download video with youtube-dl...\" && echo \"Enter the link of the video:\" && read && vurl=\$REPLY && youtube-dl -F \$vurl && echo \"Enter option in the format %video+%audio\" && read && youtube-dl -f \$REPLY \$vurl"
+ alias muvi="cd /mnt/Data/Videos/Music\ Videos/"
