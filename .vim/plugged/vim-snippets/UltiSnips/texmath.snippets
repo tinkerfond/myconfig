@@ -1,53 +1,49 @@
 priority -50
+# TODO: Write Python code to check beginning of file and use it in the context of template snippets
+snippet templ "Template"  
+\\documentclass{article}
+\\usepackage[utf8]{inputenc}
+\\usepackage{mathtools}
+\\usepackage{amssymb}
+\\usepackage{breqn}
+\\usepackage{euscript}
+\\usepackage{mathrsfs}
+\\usepackage{enumitem}
+%\\usepackage{csquotes}
+\\usepackage[colorlinks]{hyperref}
+%\\usepackage{blindtext}
 
-##############
-# MATH STUFF #
-##############
+\\usepackage{geometry}
+\\geometry{a4paper, portrait, margin=1.37in}
 
-snippet eqnn "Equation without a number" b
-\begin{equation*}
-	${0:${VISUAL}}
-\end{equation*}
+%\\usepackage[many]{tcolorbox}
+%\\newtcolorbox{mybox5}{colback=blue!9!white,colframe=white!60!blue,breakable,enhanced jigsaw}
+
+%\\usepackage{lastpage}
+%\\usepackage{fancyhdr}
+%\\usepackage{lipsum} % just for mock text
+
+%\\pagestyle{fancy}
+%\\fancyfoot[C]{\thepage\ of \pageref{LastPage}}
+%\\renewcommand{\headrulewidth}{0.4pt}% default is 0pt
+%\\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+%\\fancypagestyle{plain}{%
+%\\fancyfoot[C]{\thepage\ of \pageref{LastPage}}}
+%\\pagestyle{plain}
+%\\lhead{}
+%\\rhead{}
+%\\chead{}
+
+%\\numberwithin{equation}{section}
+%\\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\\title{${1:TITLE}}
+\\author{${2:P.Prasanna Venkatesan}}
+\\date{$3}
+
+\\begin{document}
+\\maketitle
+
+$4
+\\end{document}
 endsnippet
-
-snippet al "Align" b
-\begin{align}
-	${0:${VISUAL}}
-\end{align}
-endsnippet
-
-snippet alnn "Align without a number" b
-\begin{align*}
-	${0:${VISUAL}}
-\end{align*}
-endsnippet
-
-snippet eqa "Equation array" b
-\begin{eqnarray}
-	${1:${VISUAL}} & ${2:${VISUAL}} & ${0:${VISUAL}}
-\end{eqnarray}
-endsnippet
-
-snippet eqann "Equation array without a number" b
-\begin{eqnarray*}
-	${1:${VISUAL}} & ${2:${VISUAL}} & ${0:${VISUAL}}
-\end{eqnarray*}
-endsnippet
-
-#################
-# PHYSICS STUFF #
-#################
-
-snippet dv "Derivative" w
-\dv[${1:${VISUAL}}]{${2}}{${3}}
-endsnippet
-
-snippet pdv "Partial Derivative" w
-\pdv[${1:${VISUAL}}]{${2}}{${3}}
-endsnippet
-
-snippet SI "SI-Unit" w
-\SI{${1:${VISUAL}}}{${2}}
-endsnippet
-
-# vim:ft=snippets:
