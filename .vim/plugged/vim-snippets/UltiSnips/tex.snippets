@@ -11,54 +11,6 @@ endglobal
 
 priority 0
 #Preamble-----------start--------------------------------
-snippet templ "Template" 
-\\documentclass{article}
-\\usepackage[utf8]{inputenc}
-\\usepackage{mathtools}
-\\usepackage{amssymb}
-\\usepackage{breqn}
-\\usepackage{euscript}
-\\usepackage{mathrsfs}
-\\usepackage{enumitem}
-%\\usepackage{csquotes}
-\\usepackage[colorlinks]{hyperref}
-%\\usepackage{blindtext}
-
-\\usepackage{geometry}
-\\geometry{a4paper, portrait, margin=1.37in}
-
-%\\usepackage[many]{tcolorbox}
-%\\newtcolorbox{mybox5}{colback=blue!9!white,colframe=white!60!blue,breakable,enhanced jigsaw}
-
-%\\usepackage{lastpage}
-%\\usepackage{fancyhdr}
-%\\usepackage{lipsum} % just for mock text
-
-%\\pagestyle{fancy}
-%\\fancyfoot[C]{\thepage\ of \pageref{LastPage}}
-%\\renewcommand{\headrulewidth}{0.4pt}% default is 0pt
-%\\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
-%\\fancypagestyle{plain}{%
-%\\fancyfoot[C]{\thepage\ of \pageref{LastPage}}}
-%\\pagestyle{plain}
-%\\lhead{}
-%\\rhead{}
-%\\chead{}
-
-%\\numberwithin{equation}{section}
-%\\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
-
-\\title{${1:TITLE}}
-\\author{${2:P.Prasanna Venkatesan}}
-\\date{$3}
-
-\\begin{document}
-\\maketitle
-
-$4
-\\end{document}
-endsnippet
-
 #newcommand
 snippet dc "document class" b
 \\documentclass${2:[${3:a4paper}]}{${1:article}} ${0}
