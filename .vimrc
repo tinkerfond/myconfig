@@ -13,16 +13,18 @@ filetype off
 set backspace=indent,eol,start
 
 "Previous line mirror after cursor
-noremap <C-k> <Esc>klv$yhjpi
+map <C-k> <Esc>klv$yhjpi
 
 "Next line TeX
 autocmd FileType tex imap <C-d> \\<CR>
 
+"Refresh UltiSnips snippets and $MYVIMRC
+map <F12> : call UltiSnips#RefreshSnippets() <bar> : source $MYVIMRC <Enter>
 
 "Correct Spelling Mistakes
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
-"Ink scape
+"Inkscape
 inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 
@@ -48,16 +50,16 @@ Plug 'https://github.com/lervag/vimtex.git'
     let g:vimtex_quickfix_mode=0
 
 Plug 'https://github.com/SirVer/ultisnips.git'
-
+    let g:UltiSnipsSnippetDirectories=['~/.vim/UltiSnips']
 Plug 'https://github.com/honza/vim-snippets.git'
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsJumpForwardTrigger="<tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 Plug 'https://github.com/wincent/terminus.git'
 
 Plug 'https://github.com/KeitaNakamura/tex-conceal.vim.git'
-let g:tex_conceal="ab mg"
+    let g:tex_conceal="ab mg"
 Plug 'https://github.com/matze/vim-tex-fold.git'
 
 Plug 'https://github.com/KeitaNakamura/neodark.vim.git'
@@ -85,11 +87,11 @@ set background=dark
 hi conceal ctermbg=NONE
 
 function! SyncTexForward()
-let linenumber=line(".")
-let colnumber=col(".")
-let filename=bufname("%")
-let filenamePDF=filename[:-4]."pdf"
-let execstr="!Tathra --sync TeX-forward " . linenumber . ":" . colnumber . ":" . filename . " " . filenamePDF . "&>/dev/null &"
+    let linenumber=line(".")
+    let colnumber=col(".")
+    let filename=bufname("%")
+    let filenamePDF=filename[:-4]."pdf"
+    let execstr="!Tathra --sync TeX-forward " . linenumber . ":" . colnumber . ":" . filename . " " . filenamePDF . "&>/dev/null &"
 exec execstr 
 endfunction
 nmap  :call SyncTexForward()
