@@ -104,7 +104,7 @@ source $ZSH/oh-my-zsh.sh
  alias myconfig="cd ~/myconfig"
  alias usnip="cd ~/.vim/plugged/vim-snippets/UltiSnips"
  alias tsnip="vim ~/.vim/UltiSnips/tex.snippets"
- alias tmsnip="vim ~/.vim/UltiSnips/texmath.snippets"
+ alias tmsnip="vim ~/.vim/UltiSnips/tex_math.snippets"
  alias vimrc="vim ~/.vimrc"
  alias zshrc="vim ~/.zshrc"
  alias vis="vim --servername"
