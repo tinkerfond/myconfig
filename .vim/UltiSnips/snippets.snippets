@@ -8,6 +8,20 @@ ${0:${VISUAL}}
 `!p snip.rv = "endsnippet"`
 endsnippet
 
+snippet musnip "mathmode Ultisnips snippet definition" b
+`!p snip.rv = "context \"math()\""`
+`!p snip.rv = "snippet"` ${1:Tab_trigger} "${2:Description}" ${3:wA}
+${0:${VISUAL}}
+`!p snip.rv = "endsnippet"`
+endsnippet
+
+snippet cusnip "context Ultisnips snippet definition" b
+`!p snip.rv = "context \""`${1:env('')}`!p snip.rv="\""`
+`!p snip.rv = "snippet"` ${2:Tab_trigger} "${3:Description}" ${4:b}
+${0:${VISUAL}}
+`!p snip.rv = "endsnippet"`
+endsnippet
+
 snippet global "Global snippet" b
 `!p snip.rv = "global"` !p
 ${0:${VISUAL}}

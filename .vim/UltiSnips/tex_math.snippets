@@ -1,49 +1,937 @@
-priority -50
-# TODO: Write Python code to check beginning of file and use it in the context of template snippets
-snippet templ "Template"
-\\documentclass{article}
-\\usepackage[utf8]{inputenc}
-\\usepackage{mathtools}
-\\usepackage{amssymb}
-\\usepackage{breqn}
-\\usepackage{euscript}
-\\usepackage{mathrsfs}
-\\usepackage{enumitem}
-%\\usepackage{csquotes}
-\\usepackage[bookmarks,colorlinks]{hyperref}
-%\\usepackage{blindtext}
+# Global Context Functions...
+global !p
+def math():
+ return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+def comment(): 
+    return vim.eval('vimtex#syntax#in_comment()') == '1'
+def env(name):
+    [beg_line,nest_level] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+    return nest_level != '0'
+endglobal
 
-\\usepackage{geometry}
-\\geometry{a4paper, portrait, margin=1.37in}
+# TODO: 1)Fix the bug in dynamic snippets: Different output on different iteration.
+#       2)Make fixminus() function work. Does post_jump work for every jump?
+#       3)Add snippets for \dot{} and \ddot{}, \amalg, dagger,star
 
-%\\usepackage[many]{tcolorbox}
-%\\newtcolorbox{mybox5}{colback=blue!9!white,colframe=white!60!blue,breakable,enhanced jigsaw}
+priority 100
 
-%\\usepackage{lastpage}
-%\\usepackage{fancyhdr}
-%\\usepackage{lipsum} % just for mock text
-
-%\\pagestyle{fancy}
-%\\fancyfoot[C]{\thepage\ of \pageref{LastPage}}
-%\\renewcommand{\headrulewidth}{0.4pt}% default is 0pt
-%\\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
-%\\fancypagestyle{plain}{%
-%\\fancyfoot[C]{\thepage\ of \pageref{LastPage}}}
-%\\pagestyle{plain}
-%\\lhead{}
-%\\rhead{}
-%\\chead{}
-
-%\\numberwithin{equation}{section}
-%\\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
-
-\\title{${1:TITLE}}
-\\author{${2:P.Prasanna Venkatesan}}
-\\date{$3}
-
-\\begin{document}
-\\maketitle
-
-$4
-\\end{document}
+#Environment specific
+context "math() and env('align')"
+snippet = "align =" iA
+&=
 endsnippet
+
+#Dots
+context "math()"
+snippet dot "cdot" wA
+\\cdot $0
+endsnippet
+context "math()"
+snippet cdots "cdots" wA
+\\cdots $0
+endsnippet
+context "math()"
+snippet vdots "vdots" wA
+\\vdots $0
+endsnippet
+context "math()"
+snippet ddots "ddots" wA
+\\ddots $0
+endsnippet
+context "math()"
+snippet iddots "iddots" wA
+\\iddots $0
+endsnippet
+
+#Math relations
+context "math()"
+snippet eqv "equivalent" wA
+\\equiv $0
+endsnippet
+context "math()"
+snippet appx "approximate" wA
+\\approx $0
+endsnippet
+context "math()"
+snippet le "less than equal to" wA
+\\le $0
+endsnippet
+context "math()"
+snippet ge "greater than equal to" wA
+\\ge $0
+endsnippet
+context "math()"
+snippet neq "not equal to" wA
+\\neq $0
+endsnippet
+context "math()"
+snippet sim "similar" wA
+\\sim $0
+endsnippet
+context "math()"
+snippet esim "simeq" wA
+\\simeq $0
+endsnippet
+context "math()"
+snippet mid "mid" wA
+\\mid $0
+endsnippet
+context "math()"
+snippet prop "proportional" wA
+\\propto $0
+endsnippet
+
+#Symbols and Shapes
+context "math()"
+snippet neg "negation" wA
+\\neg $0
+endsnippet
+context "math()"
+snippet exi "Exists symbol" wA
+\\exists $0
+endsnippet
+context "math()"
+snippet nexi "Doesn't Exist symbol" wA
+\\nexists $0
+endsnippet
+context "math()"
+snippet fall "forall" wA
+\\forall $0
+endsnippet
+context "math()"
+snippet pm "plus minus" wA
+\\pm $0
+endsnippet
+context "math()"
+snippet mp "minus plus" wA
+\\mp $0
+endsnippet
+context "math()"
+snippet odot "odot" wA
+\\odot $0
+endsnippet
+context "math()"
+snippet tim "times" wA
+\\times $0
+endsnippet
+context "math()"
+snippet otim "otimes" wA
+\\otimes $0
+endsnippet
+context "math()"
+snippet plu "plus" wA
+\\plus $0
+endsnippet
+context "math()"
+snippet oplu "oplus" wA
+\\oplus $0
+endsnippet
+context "math()"
+snippet ang "Angle" wA
+\\angle $0
+endsnippet
+context "math()"
+snippet cir "power circ" wA
+^{\\circ} $0
+endsnippet
+context "math()"
+snippet tri "Triangle" wA
+\\triangle $0
+endsnippet
+context "math()"
+snippet qs "Square" wA
+\\square $0
+endsnippet
+context "math()"
+snippet qh "Blacksquare" wA
+\\blacksquare $0
+endsnippet
+context "math()"
+snippet S "section symbol" wA
+\\S
+endsnippet
+context "math()"
+snippet top "top" wA
+\\top $0
+endsnippet
+context "math()"
+snippet bot "bot" wA
+\\bot $0
+endsnippet
+context "math()"
+snippet par "parallel" wA
+\\parallel $0
+endsnippet
+context "math()"
+snippet we "wedge" wA
+\\wedge $0
+endsnippet
+context "math()"
+snippet ve "vee" wA
+\\vee $0
+endsnippet
+context "math()"
+snippet inf "Infinity" wA
+\\infty $0
+endsnippet
+
+# Set Theoretic Symbols
+context "math()"
+snippet set "Set builder notation" wA
+\\{ $1 \\mid $2 \\} $0
+endsnippet
+context "math()"
+snippet cset "Rooster list" wA
+\\{ $1, $2, \\cdots, $3 \\} $0
+endsnippet
+context "math()"
+snippet pset "Paranthesis list" wA
+\\left( $1, $2, \\cdots, $3 \\right) $0
+endsnippet
+context "math()"
+snippet sset "Square bracket list" wA
+\\left[ $1, $2, \\cdots, $3 \\right] $0
+endsnippet
+context "math()"
+snippet comp "Compliment" wA
+\\compliment $0
+endsnippet
+context "math()"
+snippet sb "Subset" wA
+\\subset $0
+endsnippet
+context "math()"
+snippet esp "Superset" wA
+\\supset $0
+endsnippet
+context "math()"
+snippet esb "Subseteq" wA
+\\subseteq $0
+endsnippet
+context "math()"
+snippet sp "Superseteq" wA
+\\supseteq $0
+endsnippet
+context "math()"
+snippet cup "Union" wA
+\\cup $0
+endsnippet
+context "math()"
+snippet cap "Intersection" wA
+\\cap $0
+endsnippet
+context "math()"
+snippet bcup "Big Union" wA
+\\bigcup_{$1}^{$2} $0
+endsnippet
+context "math()"
+snippet bcap "Big Intersection" wA
+\\bigcap_{$1}^{$2} $0
+endsnippet
+context "math()"
+snippet inc "in" wA
+\\in $0
+endsnippet
+context "math()"
+snippet nin "not in" wA
+\\ni $0
+endsnippet
+
+#Textformatting
+context "math()"
+snippet stackrel "\stackrel{}{}" wA
+\\stackrel{${1:above}}{${2:below}} ${0}
+endsnippet
+context "math()"
+snippet _ "subscript" iA
+_{$1}$0
+endsnippet
+context "math()"
+snippet ^ "superscript" iA
+^{$1}$0
+endsnippet
+context "math()"
+snippet os "overset" wA
+\\overset{$1}{$2} $0
+endsnippet
+context "math()"
+snippet us "underset" wA
+\\underset{$1}{$2} $0
+endsnippet
+context "math()"
+snippet ob "overbrace" wA
+\\overbrace{$2}^{$1} $0
+endsnippet
+context "math()"
+snippet ub "underbrace" wA
+\\underbrace{$2}_{$1} $0
+endsnippet
+context "math()"
+snippet orar "overrightarrow" wA
+\\overrightarrow{$1} $0
+endsnippet
+context "math()"
+snippet olar "overleftarrow" wA
+\\overleftarrow{$1} $0
+endsnippet
+context "math()"
+snippet olrar "overleftrightarrow" wA
+\\overleftrightarrow{$1} $0
+endsnippet
+context "math()"
+snippet wihat "wide hat" wA
+\\widehat{$1} $0
+endsnippet
+context "math()"
+snippet witil "wide tilde" wA
+\\widetilde{$1} $0
+endsnippet
+
+#Mathmode accents
+post_jump "dynamicsnippet(snip)"
+context "math()"
+snippet `([a-zA-Z])?vec` "vec" rwA 
+\\vec`!p  
+if snip.c=='':
+ if match.group(1)!=None:
+  snip.rv="{"+match.group(1)+"}"+f" $0"
+ else:
+  snip.rv="{"+f"$1"+"}"+f" $0"`
+endsnippet 
+post_jump "dynamicsnippet(snip)"
+context "math()"
+snippet `([a-zA-Z])?hat` "hat" rwA
+\\hat`!p
+if snip.c=='':
+ if match.group(1)!=None:
+  snip.rv="{"+match.group(1)+"}"+f" $0"
+ else:
+  snip.rv="{"+f"$1"+"}"+f" $0"`
+endsnippet
+post_jump "dynamicsnippet(snip)"
+context "math()"
+snippet `([a-zA-Z])?bar` "bar" rwA
+\\bar`!p
+if snip.c=='':
+ if match.group(1)!=None:
+  snip.rv="{"+match.group(1)+"}"+f" $0"
+ else:
+  snip.rv="{"+f"$1"+"}"+f" $0"`
+endsnippet
+post_jump "dynamicsnippet(snip)"
+context "math()"
+snippet `([a-zA-Z])?til` "tilde" rwA
+\\tilde`!p
+if snip.c=='':
+ if match.group(1)!=None:
+  snip.rv="{"+match.group(1)+"}"+f" $0"
+ else:
+  snip.rv="{"+f"$1"+"}"+f" $0"`
+endsnippet
+
+#Math fonts
+context "math()"
+snippet re "Real" wA
+\\Re $0
+endsnippet
+context "math()"
+snippet im "Imaginary" wA
+\\Im $0
+endsnippet
+context "math()"
+snippet ell "sylized l" wA
+\\ell $0
+endsnippet
+context "math()"
+snippet al "Aleph" wA
+\\aleph $0
+endsnippet
+context "math()"
+snippet wp "wp" wA
+\\wp $0
+endsnippet
+context "math()"
+snippet hbar "hbar" wA
+\\hbar $0
+endsnippet
+
+#Math fontmodes
+context "math()"
+snippet tt "text" wA
+\\{$1} $0
+endsnippet
+context "math()"
+snippet mf "mathfrak" wA
+\\mathfrak{${1:${VISUAL:text}}}${0}
+endsnippet
+context "math()"
+snippet mc "mathcal" wA
+\\mathcal{${1:${VISUAL:text}}}${0}
+endsnippet
+context "math()"
+snippet ms "mathscr" wA
+\\mathscr{${1:${VISUAL:text}}}${0}
+endsnippet
+context "math()"
+snippet mbb "mathbb" wA
+\\mathbb{${1:${VISUAL:text}}}${0}
+endsnippet
+
+#Lowercase greek
+context "math()"
+snippet ga "alpha" wA
+\\alpha $0
+endsnippet
+context "math()"
+snippet gb "beta" wA
+\\beta $0
+endsnippet
+context "math()"
+snippet gg "gamma" wA
+\\gamma $0
+endsnippet
+context "math()"
+snippet gd "delta" wA
+\\delta $0
+endsnippet
+context "math()"
+snippet ge "epsilon" wA
+\\epsilon $0
+endsnippet
+context "math()"
+snippet gz "zeta" wA
+\\zeta $0
+endsnippet
+context "math()"
+snippet eta "eta" wA
+\\eta $0
+endsnippet
+context "math()"
+snippet gt "theta" wA
+\\theta $0
+endsnippet
+context "math()"
+snippet gi "iota" wA
+\\iota $0
+endsnippet
+context "math()"
+snippet gk "kappa" wA
+\\kappa $0
+endsnippet
+context "math()"
+snippet gl "lambda" wA
+\\lambda $0
+endsnippet
+context "math()"
+snippet gm "mu" wA
+\\mu $0
+endsnippet
+context "math()"
+snippet gn "nu" wA
+\\nu $0
+endsnippet
+context "math()"
+snippet gx "xi" wA
+\\xi $0
+endsnippet
+#context "math()"
+#snippet o "o" wA
+#o $0
+#endsnippet
+context "math()"
+snippet pi "pi" wA
+\\pi $0
+endsnippet
+context "math()"
+snippet gr "rho" wA
+\\rho $0
+endsnippet
+context "math()"
+snippet gs "sigma" wA
+\\sigma $0
+endsnippet
+context "math()"
+snippet gt "tau" wA
+\\tau $0
+endsnippet
+context "math()"
+snippet gu "upsilon" wA
+\\upsilon $0
+endsnippet
+context "math()"
+snippet gf "phi" wA
+\\phi $0
+endsnippet
+context "math()"
+snippet gc "chi" wA
+\\chi $0
+endsnippet
+context "math()"
+snippet gps "psi" wA
+\\psi $0
+endsnippet
+context "math()"
+snippet go "omega" wA
+\\omega $0
+endsnippet
+
+#Uppercase greek
+context "math()"
+snippet bgg "Gamma" wA
+\\Gamma $0
+endsnippet
+context "math()"
+snippet bgd "Delta" wA
+\\Delta $0
+endsnippet
+context "math()"
+snippet bgt "Theta" wA
+\\Theta $0
+endsnippet
+context "math()"
+snippet bgl "Lambda" wA
+\\Lambda $0
+endsnippet
+context "math()"
+snippet bgx "Xi" wA
+\\Xi $0
+endsnippet
+context "math()"
+snippet gpi "Pi" wA
+\\Pi $0
+endsnippet
+context "math()"
+snippet bgs "Sigma" wA
+\\Sigma $0
+endsnippet
+context "math()"
+snippet bgu "Upsilon" wA
+\\Upsilon $0
+endsnippet
+context "math()"
+snippet bgf "Phi" wA
+\\Phi $0
+endsnippet
+context "math()"
+snippet bgps "Psi" wA
+\\Psi $0
+endsnippet
+context "math()"
+snippet bgo "Omega" wA
+\\Omega $0
+endsnippet
+
+#Variable greek
+context "math()"
+snippet gve "varepsilon" wA
+\\varepsilon $0
+endsnippet
+context "math()"
+snippet gvt "vartheta" wA
+\\vartheta $0
+endsnippet
+context "math()"
+snippet vpi "varpi" wA
+\\varpi
+endsnippet
+context "math()"
+snippet gvp "varphi" wA
+\\varphi $0
+endsnippet
+context "math()"
+snippet gvr "varrho" wA
+\\varrho $0
+endsnippet
+context "math()"
+snippet gvs "varsigma" wA
+\\varsigma $0
+endsnippet
+
+# Delimiter
+context "math()"
+snippet leri "left right" wA
+\\left${1} ${3:${VISUAL}} \\right${2} $0
+endsnippet
+context "math()"
+snippet lr( "left( right)" wA
+\\left( ${1:${VISUAL}} \\right) $0
+endsnippet
+context "math()"
+snippet lrv "left| right|" wA
+\\left| ${1:${VISUAL}} \\right| $0
+endsnippet
+context "math()"
+snippet lrb "left\{ right\}" wA
+\\left\\{ ${1:${VISUAL}} \\right\\} $0
+endsnippet
+context "math()"
+snippet lrs "left[ right]" wA
+\\left[ ${1:${VISUAL}} \\right] $0
+endsnippet
+context "math()"
+snippet lrn "langle rangle" wA
+\\langle ${1:${VISUAL}} \\rangle $0
+endsnippet
+context "math()"
+snippet lrc "lceil rceil" wA
+\\left\\lceil ${1:${VISUAL}} \\right\\rceil $0
+endsnippet
+context "math()"
+snippet lrf "lflooe rfloor" wA
+\\left\\lfloor ${1:${VISUAL}} \\right\\rfloor $0
+endsnippet
+
+# Arrows
+context "math()"
+snippet rar "Right arrow" wA
+\\rightarrow $0
+endsnippet
+context "math()"
+snippet lorar "Long right arrow" wA
+\\longrightarrow $0
+endsnippet
+context "math()"
+snippet lar "Left arrow" wA
+\\leftarrow $0
+endsnippet
+context "math()"
+snippet lolar "Long left arrow" wA
+\\longleftarrow $0
+endsnippet
+context "math()"
+snippet lrar "Left right arrow" wA
+\\leftrightarrow $0
+endsnippet
+context "math()"
+snippet lolrar "Long left right arrow" wA
+\\longleftrightarrow $0
+endsnippet
+context "math()"
+snippet xlar "xleftarrow" wA
+\\xleftarrow{$1} $0
+endsnippet
+context "math()"
+snippet xrar "xrightarrow" wA
+\\xrightarrow{$1} $0
+endsnippet
+context "math()"
+snippet uar "Up arrow" wA
+\\uparrow $0
+endsnippet
+context "math()"
+snippet dar "Down arrow" wA
+\\downarrow $0
+endsnippet
+context "math()"
+snippet upar "Up down arrow" wA
+\\updownarrow $0
+endsnippet
+
+#Functions,Operators
+context "math()"
+snippet sur "surd" wA
+\\surd $0
+endsnippet
+context "math()"
+snippet sq "Square root" wA
+\\sqrt{$1} $0
+endsnippet
+context "math()"
+snippet nsq "nsq" wA
+\\sqrt[$1]{$2} $0
+endsnippet
+context "math()"
+snippet fra "\frac{}{}" wA
+\\frac{ ${1} }{ ${2} } ${0}
+endsnippet
+context "math()"
+snippet dfra "\dfrac{}{}" wA
+\\dfrac{ ${1} }{ ${2} } ${0}
+endsnippet
+context "math()"
+snippet tfra "\tfrac{}{}" wA
+\\tfrac{ ${1} }{ ${2} } ${0}
+endsnippet
+context "math()"
+snippet sum "\sum^{}_{}" wA
+\\sum^{${1:n}}_{${2:i=1}} ${0}
+endsnippet
+context "math()"
+snippet pro "\prod^{}_{}" wA
+\\prod^{${1:n}}_{${2:i=1}} ${0}
+endsnippet
+context "math()"
+snippet cpro "\coprod^{}_{}" wA
+\\coprod^{${1:n}}_{${2:i=1}} ${0}
+endsnippet
+context "math()"
+snippet lim "\lim_{}" wA
+\\lim_{ ${1} \\to ${2} } ${0}
+endsnippet
+context "math()"
+snippet fun "function" wA
+{${1:f}: { ${2} \\to ${3} }} ${0}
+endsnippet
+context "math()"
+snippet der "d/dx operator" wA
+\\frac{d ${2}}{d ${1:x}} ${0}
+endsnippet
+context "math()"
+snippet pder "Partial derivative" wA
+\\frac{\\partial ${2}}{\\partial ${1:x}} ${0}
+endsnippet
+context "math()"
+snippet `nder(\w*)` "nth d/dx operator" rw
+\\frac{d`!p snip.rv=findSum(match.group(1))`}{`!p snip.rv=printd("d",match.group(1))`} $0
+endsnippet
+context "math()"
+snippet `npder(\w*)` "Dynamic Partial Derivative" rw
+\\frac{\\partial`!p snip.rv=findSum(match.group(1))`}{`!p snip.rv=printd("\\partial",match.group(1))`} $0
+endsnippet
+context "math()"
+snippet par "Partial" wA
+\\partial
+endsnippet
+context "math()"
+snippet `([dcg])?nab` "Nabla & variants" rwA
+`!p 
+if match.group(1)==None:
+ snip.rv="\\nabla"
+elif match.group(1)=='d':
+ snip.rv="\\nabla\\cdot"
+elif match.group(1)=='c':
+ snip.rv="\\vec{\\nabla}\\times"
+elif match.group(1)=='g':
+ snip.rv="\\vec{\\nabla}"
+`{$1} $0
+endsnippet
+context "math()"
+snippet intp "Integral" wA
+\\int $0
+endsnippet
+context "math()"
+snippet intl "Integral with limits" wA
+\\int_{$1}^{$2} $0
+endsnippet
+context "math()"
+snippet ointp "Circular Integral" wA
+\\oint $0
+endsnippet
+context "math()"
+snippet ointl "Circular Integral with limits" wA
+\\oint_{$1} $0
+endsnippet
+context "math()"
+snippet opi "Open interval" wA
+($1,$2) $0
+endsnippet
+context "math()"
+snippet cli "Closed interval" wA
+[$1,$2] $0
+endsnippet
+context "math()"
+snippet sinf "sin function" wA
+\\sin($1) $0
+endsnippet
+context "math()"
+snippet cosf "cos function" wA
+\\cos($1) $0
+endsnippet
+context "math()"
+snippet tanf "tan function" wA
+\\tan($1) $0
+endsnippet
+context "math()"
+snippet cotf "cot function" wA
+\\cot{$1} $0
+endsnippet
+context "math()"
+snippet secf "sec function" wA
+\\sec($1) $0
+endsnippet
+context "math()"
+snippet cscf "csc function" wA
+\\csc($1) $0
+endsnippet
+context "math()"
+snippet sinh "sinh function" wA
+\\sinh($1) $0
+endsnippet
+context "math()"
+snippet cosh "cosh function" wA
+\\cosh($1) $0
+endsnippet
+context "math()"
+snippet tanh "tanh function" wA
+\\tanh($1) $0
+endsnippet
+context "math()"
+snippet coth "coth function" wA
+\\coth{$1} $0
+endsnippet
+context "math()"
+snippet sini "arcsin function" wA
+\\arcsin($1) $0
+endsnippet
+context "math()"
+snippet cosi "arccos function" wA
+\\arccos($1) $0
+endsnippet
+context "math()"
+snippet tani "arctan function" wA
+\\arctan($1) $0
+endsnippet
+context "math()"
+snippet coti "arccot function" wA
+\\arccot{$1} $0
+endsnippet
+
+
+#TODO:Debug/Improve
+context "math()"
+#post_jump "fixminus(snip)"
+post_jump "dynamicsnippet(snip)"
+snippet `(\d*)pol([a-zA-Z0-9_\{}+-^]*)` "Polynomial" rw
+`!p if snip.c =='' :
+      if match.group(1)!='':
+        snip.rv=pol_gen(int(match.group(1)),match.group(2))
+      else:
+        snip.rv="\\\\sum"+"_{${1:k}=${2:0}}^{${3:n}}"+str(match.group(2))+"^{$1} $0"`
+endsnippet
+
+#Dynamic Arrays and Matrices
+post_jump "dynamicsnippet(snip)"
+context "math()"
+snippet 'arr(\d+),(\d+)' "LaTeX array" r
+\\begin{array}{`!p if snip.c=='':snip.rv = "c"*int(match.group(2))`}
+`!p
+if snip.c=='':
+ psiz=0
+ osiz=16
+ begl=" "*len(snip.buffer[snip.snippet_start[0]])
+ snip.rv = create_matrix(match.group(1), match.group(2), "&") `$0
+`!p if snip.c=='':snip.rv=" "*(len(begl) - osiz-psiz- int(match.group(2))) `\\end{array}
+endsnippet
+
+post_jump "dynamicsnippet(snip)"
+context "math()"
+snippet `(v|V|b|B|p|small)?mat(\d+),(\d+)` "Matrix" r
+\\begin{`!p if snip.c=='':snip.rv=match.group(1) if match.group(1)!=None else ""`matrix}
+`!p
+if snip.c=='':
+ psiz= len(match.group(1)) if match.group(1)!=None else 0
+ osiz=11
+ begl=" "*len(snip.buffer[snip.snippet_start[0]])
+ snip.rv = create_matrix(match.group(2), match.group(3), "&")
+`$0
+`!p if snip.c=='':snip.rv=" "*(len(begl) - osiz - psiz- int(match.group(2)))
+`\\end{`!p if snip.c=='': snip.rv=match.group(1) if match.group(1)!=None else ""`matrix}
+endsnippet
+
+global !p
+#Dynamic Tabstop Generation
+def dynamicsnippet(snip):
+	# Create anonymous snippet body
+	anon_snippet_body = ""
+
+	# Get start and end line number of expanded snippet
+	start = snip.snippet_start[0]
+	end = snip.snippet_end[0]
+
+        # Append current line into anonymous snippet
+	for i in range(start, end + 1):
+		anon_snippet_body += snip.buffer[i]
+		anon_snippet_body += "" if i == end else "\n"
+
+	# Delete expanded snippet line till second to last line
+	for i in range(start, end):
+		del snip.buffer[start]
+
+	# Empty last expanded snippet line while preserving the line
+	snip.buffer[start] = ''
+
+	# Expand anonymous snippet
+	snip.expand_anon(anon_snippet_body)
+def pol_gen(n,xval):
+     st=""
+     for i in range(1,n+1):
+       st+="{"+f"${i}"+"}"+xval+"^{"+str(n-i+1)+"}+"
+     return st
+#def fixminus(snip):
+	# Create anonymous snippet body
+	#anon_snippet_body = ""
+
+	# Get start and end line number of expanded snippet
+	#start = snip.snippet_start[0]
+	#end = snip.snippet_end[0]
+
+        # Append current line into anonymous snippet
+	#for i in range(start, end + 1):
+	# anon_snippet_body = "1"+"       $2"#snip.buffer[start].replace("+{-","-{ ")
+	#elif snip.tabstop==1:
+	# anon_snippet_body = "2"+"       $3"
+	#anon_snippet_body += "" if i == end else "\n"
+
+	# Delete expanded snippet line till second to last line
+	#for i in range(start, end):
+	#del snip.buffer[start]
+
+	# Empty last expanded snippet line while preserving the line
+	#snip.buffer[start] = ''
+
+	# Expand anonymous snippet
+	#snip.expand_anon(anon_snippet_body)
+def findSum(str1): 
+  
+    # A temporary str1ing 
+    temp = 0
+  
+    # holds sum of all numbers 
+    # present in the str1ing 
+    Sum = 0
+    icount=0
+    # read each character in input string 
+    for ch in str1: 
+  
+        # if current character is a digit 
+        if (ch.isdigit()): 
+            Sum += int(ch) 
+            icount=icount+1
+    Sum=Sum+len(str1)-2*icount
+    if Sum==1:
+      prin=""
+    # atoi(temp.c_str1()) takes care 
+    # of trailing numbers 
+    else:
+      prin="^{"+str(Sum)+"}"
+    return prin
+def printd(str2,str1):
+  i=0
+  result = "" 
+  len(str1)
+  while i<len(str1)-1:
+    if str1[i].isalpha():
+     if str1[i+1].isdigit():
+      result = result +" "+ str2+" "+str1[i]+"^{"+str1[i+1]+"}"
+     else:
+      result=result+" "+ str2 +" "+str1[i]
+    i=i+1 
+  if str1[len(str1)-1].isalpha():
+   result=result+" "+str2+" "+str1[len(str1)-1]
+  return result
+
+def create_matrix(rows, cols, sep):
+	indl= " "*(len(begl)-psiz-osiz+4) # indentation for inside of matrix
+	#psiz is the pre dynamic size, osiz is the size of the \begin{..}
+	endl="\\\\\\\\\n"
+	ress = ""
+	placeholder = 1
+	for _ in range(0, int(rows)):
+		ress += indl + f"${placeholder} "
+		placeholder += 1
+		for _ in range(0, int(cols) - 1):
+			ress += sep + f" ${placeholder} "
+			placeholder += 1
+		ress += endl
+	return ress[:-5]
+endglobal

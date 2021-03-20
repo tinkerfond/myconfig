@@ -6,17 +6,16 @@ set wrap
 set ruler
 set cul
 set spell
-let g:tex_indent_brace=0
 set clipboard=unnamed
+set noswapfile
 
-filetype off
 set backspace=indent,eol,start
 
 "Previous line mirror after cursor
 map <C-k> <Esc>klv$yhjpi
 
 "Next line TeX
-autocmd FileType tex imap <C-d> \\<CR>
+"autocmd FileType tex imap <C-d> \\<CR>
 
 "Refresh UltiSnips snippets and $MYVIMRC
 map <F12> : call UltiSnips#RefreshSnippets() <bar> : source $MYVIMRC <Enter>
@@ -45,16 +44,18 @@ call plug#begin()
 Plug 'https://github.com/mg979/vim-visual-multi.git'
 Plug 'https://github.com/preservim/nerdtree.git'
 Plug 'https://github.com/lervag/vimtex.git'
+    let g:tex_indent_brace=0
     let g:tex_flavor='latex'
     let g:vimtex_view_method='zathura'
     let g:vimtex_quickfix_mode=0
 
 Plug 'https://github.com/SirVer/ultisnips.git'
-    let g:UltiSnipsSnippetDirectories=['~/.vim/UltiSnips']
-Plug 'https://github.com/honza/vim-snippets.git'
+    let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
     let g:UltiSnipsExpandTrigger="<tab>"
     let g:UltiSnipsJumpForwardTrigger="<tab>"
     let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+"Plug 'https://github.com/honza/vim-snippets.git'
 
 Plug 'https://github.com/wincent/terminus.git'
 
@@ -65,12 +66,12 @@ Plug 'https://github.com/matze/vim-tex-fold.git'
 Plug 'https://github.com/KeitaNakamura/neodark.vim.git'
 
 Plug 'https://github.com/907th/vim-auto-save.git'
-"let g:auto_save_events = ["Insert Leave", "TextChanged"]
-"let g:auto_save = 0
-"au group ft_TeX
-"  au!
-"  au File Type TeX let b:auto_save = 1
-"au group E
+"    let g:auto_save_events = ["Insert", "TextChanged"]
+"    let g:auto_save = 1
+"     augroup ft_tex
+"       au!
+"       au FileType tex let b:auto_save = 1
+"     augroup END
 
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'

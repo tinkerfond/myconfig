@@ -1,0 +1,58 @@
+global !p
+def line0():
+ return snip.line==0
+endglobal
+
+#TODO: Incorporate beginning of line condition into template()
+#HINT: Get the snippet string in python
+
+# Template
+context "line0()"
+snippet `^templ` "Template" rm
+\\documentclass{article}
+\\usepackage[utf8]{inputenc}
+\\usepackage{mathtools}
+\\usepackage{amssymb}
+\\usepackage{breqn}
+\\usepackage{euscript}
+\\usepackage{mathrsfs}
+\\usepackage{enumitem}
+%\\usepackage{csquotes}
+\\usepackage[bookmarks,colorlinks]{hyperref}
+%\\usepackage{blindtext}
+
+\\usepackage{geometry}
+\\geometry{a4paper, portrait, margin=1.37in}
+
+%\\usepackage[many]{tcolorbox}
+%\\newtcolorbox{mybox5}{colback=blue!9!white,colframe=white!60!blue,breakable,enhanced jigsaw}
+
+%\\usepackage{lastpage}
+%\\usepackage{fancyhdr}
+%\\usepackage{lipsum} % just for mock text
+
+%\\pagestyle{fancy}
+%\\fancyfoot[C]{\thepage\ of \pageref{LastPage}}
+%\\renewcommand{\headrulewidth}{0.4pt}% default is 0pt
+%\\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+%\\fancypagestyle{plain}{%
+%\\fancyfoot[C]{\thepage\ of \pageref{LastPage}}}
+%\\pagestyle{plain}
+%\\lhead{}
+%\\rhead{}
+%\\chead{}
+
+%\\numberwithin{equation}{section}
+%\\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\\title{${1:TITLE}}
+\\author{${2:P.Prasanna Venkatesan}}
+\\date{$3}
+
+\\begin{document}
+\\maketitle
+
+$4
+\\end{document}
+endsnippet
+
