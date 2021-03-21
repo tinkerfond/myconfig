@@ -13,18 +13,18 @@ def document():
     return vim.eval("vimtex#env#is_inside('document')")[1] != '0'
 endglobal
 
-snippet chk "check" b
-`!p snip.rv=vim.eval("vimtex#env#is_inside('document')")[1]`
-endsnippet
-snippet pre "preamble test" "snip.line==0" e 
+#snippet chk "check" b
+#`!p snip.rv=vim.eval("vimtex#env#is_inside('document')")[1]`
+#endsnippet
+snippet pre "preamble test" "snip.column==2" e 
 `!p snip.rv=True if (snip.snippet_start[0]==0) else False` hi
 endsnippet
-snippet pre "preamble test" "snip.line==1" e 
-VF
-endsnippet
-snippet pre "" 
-rem
-endsnippet
+#snippet pre "preamble test" "snip.line==1" e 
+#VF
+#endsnippet
+#snippet pre "" 
+#rem
+#endsnippet
 
 priority 000
 #Preamble
@@ -114,18 +114,12 @@ ${0:${VISUAL}}
 endsnippet
 # Mathmode
 context "document()"
-context "document()"
 snippet mm "\[...\]" bA
 \\[${0:${VISUAL}}\\]
 endsnippet
 context "document()"
 snippet mk "Math" wA
-\$${VISUAL}$1\$`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
-	snip.rv = ' '
-else:
-	snip.rv = ''
-`$2
+\$${VISUAL}$1\$ $2
 endsnippet
 context "document()"
 snippet eqnarray "eqnarray environment"
@@ -165,7 +159,7 @@ snippet item "itemize environment"
 \\end{itemize}
 endsnippet
 context "document() and env('itemize')"
-snippet it "\item" bA
+snippet it "\item" b
 \\item ${1:${VISUAL}}
 endsnippet
 
@@ -341,14 +335,6 @@ snippet bf "bold face text" w
 \\textbf{${1:${VISUAL:text}}}${0}
 endsnippet
 context "document()"
-snippet bs "Bold symbol" w
-\\boldsymbol{${1:${VISUAL:text}}}${0}
-endsnippet
-context "document()"
-snippet mb "Math Bold -mathmode" w
-\\mathbf{${1:${VISUAL:text}}}${0}
-endsnippet
-context "document()"
 snippet ul "underline text" w
 \\underline{${1:${VISUAL:text}}}${0}
 endsnippet
@@ -403,7 +389,7 @@ snippet fig "figure environment (includegraphics)"
 ${0}
 endsnippet
 context "document()"
-snippet tikz "figure environment (tikzpicture)"
+snippet tik "figure environment (tikzpicture)"
 \\begin{figure}[htpb]
 \\begin{center}
 \\begin{tikzpicture}[scale=${1:1}, transform shape]
@@ -427,7 +413,7 @@ ${3}
 ${0}
 endsnippet
 context "document()"
-snippet tikzcd "tikzcd environment in equation"
+snippet tikcd "tikzcd environment in equation"
 \\begin{equation}
 \\begin{tikzcd}
 ${1}
@@ -530,29 +516,38 @@ context "document()"
 snippet enq "enquote {csquotes}"
 \\enquote{${1:${VISUAL:text}}} ${0}
 endsnippet
+context "document()"
+snippet ht "hypertarget" 
+\\hypertarget{${1:label_it}}{${2:text}}
+endsnippet
+context "document()"
+snippet hl "hyperlink" 
+\\hyperlink{${1:label_of?}}{${2:text}}
+endsnippet
 
 global !p
 #Dynamic Tabstop Generation
 def dynamicsnippet(snip):
-	# Create anonymous snippet body
-	anon_snippet_body = ""
-
-	# Get start and end line number of expanded snippet
-	start = snip.snippet_start[0]
-	end = snip.snippet_end[0]
-
-        # Append current line into anonymous snippet
-	for i in range(start, end + 1):
-		anon_snippet_body += snip.buffer[i]
-		anon_snippet_body += "" if i == end else "\n"
-
-	# Delete expanded snippet line till second to last line
-	for i in range(start, end):
-		del snip.buffer[start]
-
-	# Empty last expanded snippet line while preserving the line
-	snip.buffer[start] = ''
-
-	# Expand anonymous snippet
-	snip.expand_anon(anon_snippet_body)
+	if snip.tabstop==0:
+		# Create anonymous snippet body
+		anon_snippet_body = ""
+	
+		# Get start and end line number of expanded snippet
+		start = snip.snippet_start[0]
+		end = snip.snippet_end[0]
+	
+	        # Append current line into anonymous snippet
+		for i in range(start, end + 1):
+			anon_snippet_body += snip.buffer[i]
+			anon_snippet_body += "" if i == end else "\n"
+	
+		# Delete expanded snippet line till second to last line
+		for i in range(start, end):
+			del snip.buffer[start]
+	
+		# Empty last expanded snippet line while preserving the line
+		snip.buffer[start] = ''
+	
+		# Expand anonymous snippet
+		snip.expand_anon(anon_snippet_body)
 endglobal

@@ -12,6 +12,7 @@ endglobal
 # TODO: 1)Fix the bug in dynamic snippets: Different output on different iteration.
 #       2)Make fixminus() function work. Does post_jump work for every jump?
 #       3)Add snippets for \dot{} and \ddot{}, \amalg, dagger,star
+#       4)Add iint and other related stuff
 
 priority 100
 
@@ -53,11 +54,11 @@ snippet appx "approximate" wA
 \\approx $0
 endsnippet
 context "math()"
-snippet le "less than equal to" wA
+snippet lq "less than equal to" wA
 \\le $0
 endsnippet
 context "math()"
-snippet ge "greater than equal to" wA
+snippet gq "greater than equal to" wA
 \\ge $0
 endsnippet
 context "math()"
@@ -131,7 +132,11 @@ snippet ang "Angle" wA
 \\angle $0
 endsnippet
 context "math()"
-snippet cir "power circ" wA
+snippet cir "circ" wA
+\\circ $0
+endsnippet
+context "math()"
+snippet pcir "power circ" wA
 ^{\\circ} $0
 endsnippet
 context "math()"
@@ -147,7 +152,7 @@ snippet qh "Blacksquare" wA
 \\blacksquare $0
 endsnippet
 context "math()"
-snippet S "section symbol" wA
+snippet sos "section symbol" wA
 \\S
 endsnippet
 context "math()"
@@ -163,11 +168,11 @@ snippet par "parallel" wA
 \\parallel $0
 endsnippet
 context "math()"
-snippet we "wedge" wA
+snippet wee "wedge" wA
 \\wedge $0
 endsnippet
 context "math()"
-snippet ve "vee" wA
+snippet vee "vee" wA
 \\vee $0
 endsnippet
 context "math()"
@@ -295,7 +300,7 @@ snippet `([a-zA-Z])?vec` "vec" rwA
 if snip.c=='':
  if match.group(1)!=None:
   snip.rv="{"+match.group(1)+"}"+f" $0"
- else:
+ elif match.group(1)!='\\':
   snip.rv="{"+f"$1"+"}"+f" $0"`
 endsnippet 
 post_jump "dynamicsnippet(snip)"
@@ -358,7 +363,7 @@ endsnippet
 #Math fontmodes
 context "math()"
 snippet tt "text" wA
-\\{$1} $0
+\\text{${1:${VISUAL:text}}}${0}
 endsnippet
 context "math()"
 snippet mf "mathfrak" wA
@@ -375,6 +380,14 @@ endsnippet
 context "math()"
 snippet mbb "mathbb" wA
 \\mathbb{${1:${VISUAL:text}}}${0}
+endsnippet
+context "math()"
+snippet mbf "mathbf" w
+\\mathbf{${1:${VISUAL:text}}}${0}
+endsnippet
+context "math()"
+snippet mbs "math boldsymbol" w
+\\boldsymbol{${1:${VISUAL:text}}}${0}
 endsnippet
 
 #Lowercase greek
@@ -642,15 +655,15 @@ snippet nsq "nsq" wA
 endsnippet
 context "math()"
 snippet fra "\frac{}{}" wA
-\\frac{ ${1} }{ ${2} } ${0}
+\\frac{${1}}{${2}} ${0}
 endsnippet
 context "math()"
 snippet dfra "\dfrac{}{}" wA
-\\dfrac{ ${1} }{ ${2} } ${0}
+\\dfrac{${1}}{${2}} ${0}
 endsnippet
 context "math()"
 snippet tfra "\tfrac{}{}" wA
-\\tfrac{ ${1} }{ ${2} } ${0}
+\\tfrac{${1}}{${2}} ${0}
 endsnippet
 context "math()"
 snippet sum "\sum^{}_{}" wA
@@ -714,12 +727,20 @@ snippet intl "Integral with limits" wA
 \\int_{$1}^{$2} $0
 endsnippet
 context "math()"
-snippet ointp "Circular Integral" wA
-\\oint $0
+snippet iint "Double Integral" wA
+\\iint_{$1} $0
 endsnippet
 context "math()"
-snippet ointl "Circular Integral with limits" wA
+snippet iiint "Triple Integral" wA
+\\iiint_{$1} $0
+endsnippet
+context "math()"
+snippet oint "Circular Integral with limits" wA
 \\oint_{$1} $0
+endsnippet
+context "math()"
+snippet oiint "Closed Double integral" wA
+\\oiint_{$1}
 endsnippet
 context "math()"
 snippet opi "Open interval" wA
@@ -831,27 +852,28 @@ endsnippet
 global !p
 #Dynamic Tabstop Generation
 def dynamicsnippet(snip):
-	# Create anonymous snippet body
-	anon_snippet_body = ""
-
-	# Get start and end line number of expanded snippet
-	start = snip.snippet_start[0]
-	end = snip.snippet_end[0]
-
-        # Append current line into anonymous snippet
-	for i in range(start, end + 1):
-		anon_snippet_body += snip.buffer[i]
-		anon_snippet_body += "" if i == end else "\n"
-
-	# Delete expanded snippet line till second to last line
-	for i in range(start, end):
-		del snip.buffer[start]
-
-	# Empty last expanded snippet line while preserving the line
-	snip.buffer[start] = ''
-
-	# Expand anonymous snippet
-	snip.expand_anon(anon_snippet_body)
+	if snip.tabstop==0:
+		# Create anonymous snippet body
+		anon_snippet_body = ""
+	
+		# Get start and end line number of expanded snippet
+		start = snip.snippet_start[0]
+		end = snip.snippet_end[0]
+	
+	        # Append current line into anonymous snippet
+		for i in range(start, end + 1):
+			anon_snippet_body += snip.buffer[i]
+			anon_snippet_body += "" if i == end else "\n"
+	
+		# Delete expanded snippet line till second to last line
+		for i in range(start, end):
+			del snip.buffer[start]
+	
+		# Empty last expanded snippet line while preserving the line
+		snip.buffer[start] = ''
+	
+		# Expand anonymous snippet
+		snip.expand_anon(anon_snippet_body)
 def pol_gen(n,xval):
      st=""
      for i in range(1,n+1):
