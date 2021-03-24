@@ -100,6 +100,14 @@ snippet fall "forall" wA
 \\forall $0
 endsnippet
 context "math()"
+snippet thf "therefore" wA
+\\therefore $0
+endsnippet
+context "math()"
+snippet imp "Implies" wA
+\\implies $0
+endsnippet
+context "math()"
 snippet pm "plus minus" wA
 \\pm $0
 endsnippet
@@ -196,6 +204,16 @@ endsnippet
 context "math()"
 snippet sset "Square bracket list" wA
 \\left[ $1, $2, \\cdots, $3 \\right] $0
+endsnippet
+context "math()"
+post_jump "dynamicsnippet(snip)"
+snippet `([2-9])?pli` "Finite Paranthesis list" rwA
+`!p snip.rv="("+cexp(match.group(1))+") $0" if match.group(1)!=None else "($1, $2) $0"`
+endsnippet
+context "math()"
+post_jump "dynamicsnippet(snip)"
+snippet `([2-9])?sli` "Finite Square bracket list" rwA
+`!p snip.rv="["+cexp(match.group(1))+"] $0" if match.group(1)!=None else "($1, $2) $0`
 endsnippet
 context "math()"
 snippet comp "Compliment" wA
@@ -336,11 +354,11 @@ endsnippet
 
 #Math fonts
 context "math()"
-snippet re "Real" wA
+snippet cre "Real" wA
 \\Re $0
 endsnippet
 context "math()"
-snippet im "Imaginary" wA
+snippet cim "Imaginary" wA
 \\Im $0
 endsnippet
 context "math()"
@@ -566,7 +584,7 @@ snippet leri "left right" wA
 \\left${1} ${3:${VISUAL}} \\right${2} $0
 endsnippet
 context "math()"
-snippet lr( "left( right)" wA
+snippet lrp "left( right)" wA
 \\left( ${1:${VISUAL}} \\right) $0
 endsnippet
 context "math()"
@@ -743,14 +761,6 @@ snippet oiint "Closed Double integral" wA
 \\oiint_{$1}
 endsnippet
 context "math()"
-snippet opi "Open interval" wA
-($1,$2) $0
-endsnippet
-context "math()"
-snippet cli "Closed interval" wA
-[$1,$2] $0
-endsnippet
-context "math()"
 snippet sinf "sin function" wA
 \\sin($1) $0
 endsnippet
@@ -903,6 +913,14 @@ def pol_gen(n,xval):
 
 	# Expand anonymous snippet
 	#snip.expand_anon(anon_snippet_body)
+# For pli and cli
+def cexp(n):
+ out=""
+ i=1
+ for _ in range(int(n)):
+  out+=f"${i}, "
+  i+=1
+ return out[:-2]
 def findSum(str1): 
   
     # A temporary str1ing 

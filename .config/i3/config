@@ -26,8 +26,10 @@ font pango:monospace 12
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-#Natural scrolling
-exec --no-startup-id synclient HorizTwoFingerScroll=1 VertScrollDelta=-113
+#Startup
+exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113
+exec --no-startup-id fusuma -c ~/.config/fusuma/config_i3.yml
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod

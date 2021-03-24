@@ -57,127 +57,107 @@ $0
 endsnippet
 
 #Document
-context "document()"
 snippet begin "\begin{}...\end{} block" bw
 \\begin{${1:env}}
 ${0:${VISUAL}}
 \\end{$1}
 endsnippet
-context "document()"
 snippet tab "tabular (or arbitrary) environment" w
 \\begin{${1:tabular}}{${2:c}}
 ${0:${VISUAL}}
 \\end{$1}
 endsnippet
-context "document()"
 snippet thm "thm (or arbitrary) environment with optional argument"
 \\begin[${1:author}]{${2:thm}}
 ${0:${VISUAL}}
 \\end{$2}
 endsnippet
-context "document()"
 snippet center "center environment"
 \\begin{center}
 ${0:${VISUAL}}
 \\end{center}
 endsnippet
-context "document()"
 snippet ali "align(ed) environment"
 \\begin{align${1:ed}}
 ${0:${VISUAL}}
 \\end{align$1}
 endsnippet
-context "document()"
 snippet gat "gather(ed) environment"
 \\begin{gather${1:ed}}
 ${0:${VISUAL}}
 \\end{gather$1}
 endsnippet
-context "document()"
 snippet eq "equation environment" w
 \\begin{equation}
 ${0:${VISUAL}}
 \\end{equation}
 endsnippet
-context "document()"
 snippet eql "Labeled equation environment" w
 \\begin{equation}
 \\label{eq:${2}}
 ${0:${VISUAL}}
 \\end{equation}
 endsnippet
-context "document()"
 snippet eq* "unnumbered equation environment"
 \\begin{equation*}
 ${0:${VISUAL}}
 \\end{equation*}
 endsnippet
 # Mathmode
-context "document()"
 snippet mm "\[...\]" bA
 \\[${0:${VISUAL}}\\]
 endsnippet
-context "document()"
 snippet mk "Math" wA
 \$${VISUAL}$1\$ $2
 endsnippet
-context "document()"
 snippet eqnarray "eqnarray environment"
 \\begin{eqnarray}
 ${0:${VISUAL}}
 \\end{eqnarray}
 endsnippet
-context "document()"
 snippet lab "label" 
 \\label{${1:eq:}${2:fig:}${3:tab:}${0}}
 endsnippet
 
 # Enumerate
-context "document()"
 snippet enum "enumerate environment"
 \\begin{enumerate}
 \\item ${0}
 \\end{enumerate}
 endsnippet
-context "document()"
 snippet enuma "enumerate environment"
 \\begin{enumerate}[(a)]
 \\item ${0}
 \\end{enumerate}
 endsnippet
-context "document()"
 snippet enumi "enumerate environment"
 \\begin{enumerate}[(i)]
 \\item ${0}
 \\end{enumerate}
 endsnippet
 # Itemize
-context "document()"
 snippet item "itemize environment"
 \\begin{itemize}
 \\item ${0}
 \\end{itemize}
 endsnippet
-context "document() and env('itemize')"
+context "env('itemize') or env('enumerate')"
 snippet it "\item" b
 \\item ${1:${VISUAL}}
 endsnippet
 
 # Description
-context "document()"
 snippet desc "description environment"
 \\begin{description}
 \\item[${1}] ${0}
 \\end{description}
 endsnippet
 # Endless new item
-context "document()"
 snippet ]i "\item (recursive)"
 \\item ${1}
 ${0:]i}
 endsnippet
 # Cases
-context "document()"
 snippet cas "cases environment"
 \\begin{cases}
 ${1:equation}, &\\text{ if }${2:case}\\
@@ -185,14 +165,12 @@ ${0:${VISUAL}}
 \\end{cases}
 endsnippet
 # Split
-context "document()"
 snippet spl "split environment"
 \\begin{split}
 ${0:${VISUAL}}
 \\end{split}
 endsnippet
 # Part
-context "document()"
 snippet part "document \part"
 \\part{${1:part name}} % (fold)%
 \\label{prt:${2:$1}}
@@ -200,184 +178,146 @@ ${0}
 % part $2 (end)
 endsnippet
 # Chapter
-context "document()"
 snippet chp "\chapter"
 \\chapter{${1:chapter name}}%$2
 ${0}
 endsnippet
 # Section
-context "document()"
 snippet sec "\section"
 \\section{${1:section name}}%$2
 ${0}
 endsnippet
 # Section without number
-context "document()"
 snippet sec* "\section*"
 \\section*{${1:section name}}%$2
 ${0}
 endsnippet
 # Sub Section
-context "document()"
 snippet sub "\subsection"
 \\subsection{${1:subsection name}}%$2
 ${0}
 endsnippet
 # Sub Section without number
-context "document()"
 snippet sub* "\subsection*"
 \\subsection*{${1:subsection name}}%$2
 ${0}
 endsnippet
 # Sub Sub Section
-context "document()"
 snippet ssub "\subsubsection"
 \\subsubsection{${1:subsubsection name}}%$2
 ${0}
 endsnippet
 # Sub Sub Section without number
-context "document()"
 snippet ssub* "\subsubsection*"
 \\subsubsection*{${1:subsubsection name}%$2
 ${0}
 endsnippet
 # Paragraph
-context "document()"
 snippet par "\paragraph"
 \\paragraph{${1:paragraph name}}%$2
 ${0}
 endsnippet
 # Sub Paragraph
-context "document()"
 snippet subp "\subparagraph"
 \\subparagraph{${1:subparagraph name}}%$2
 ${0}
 endsnippet
-context "document()"
 snippet ni "\noindent"
 \\noindent
 ${0}
 endsnippet
 #Newpage
-context "document()"
 snippet newp "New Page" w
 \\newpage
 endsnippet
 #References
-context "document()"
 snippet itd "description \item"
 \\item[${1:description}] ${0:item}
 endsnippet
-context "document()"
 snippet figure "reference to a figure"
 ${1:Figure}~\\ref{${2:fig:}}
 endsnippet
-context "document()"
 snippet table "reference to a table"
 ${1:Table}~\\ref{${2:tab:}}
 endsnippet
-context "document()"
 snippet listing "reference to a listing"
 ${1:Listing}~\\ref{${2:list}}
 endsnippet
-context "document()"
 snippet section "reference to a section"
 ${1:Section}~\\ref{sec:${2}} ${0}
 endsnippet
-context "document()"
 snippet page "reference to a page"
 ${1:page}~\\pageref{${2}} ${0}
 endsnippet
-context "document()"
 snippet index "\index"
 \\index{${1:index}} ${0}
 endsnippet
 
 #Citations
-context "document()"
 snippet citen "\citen"
 \\citen{${1}} ${0}
 endsnippet
 
 # natbib citations
-context "document()"
 snippet citep "\citep"
 \\citep{${1}} ${0}
 endsnippet
-context "document()"
 snippet citet "\citet"
 \\citet{${1}} ${0}
 endsnippet
-context "document()"
 snippet cite "\cite[]{}"
 \\cite[${1}]{${2}} ${0}
 endsnippet
-context "document()"
 snippet citea "\citeauthor"
 \\citeauthor{${1}} ${0}
 endsnippet
-context "document()"
 snippet citey "\citeyear"
 \\citeyear{${1}} ${0}
 endsnippet
-context "document()"
 snippet fcite "\footcite[]{}"
 \\footcite[${1}]{${2}}${0}
 endsnippet
 
 #Formating text: italic, bold, underline, small capital, emphasise ..
-context "document()"
 snippet ita "italic text" w
 \\textit{${1:${VISUAL:text}}}${0}
 endsnippet
-context "document()"
 snippet bf "bold face text" w
 \\textbf{${1:${VISUAL:text}}}${0}
 endsnippet
-context "document()"
 snippet ul "underline text" w
 \\underline{${1:${VISUAL:text}}}${0}
 endsnippet
-context "document()"
 snippet ol "overline text" w
 \\overline{${1:${VISUAL:text}}}${0}
 endsnippet
-context "document()"
 snippet emp "emphasize text" w
 \\emph{${1:${VISUAL:text}}}${0}
 endsnippet
-context "document()"
 snippet sc "small caps text" w
 \\textsc{${1:${VISUAL:text}}}${0}
 endsnippet
 #Choosing font
-context "document()"
 snippet sf "sans serife text"
 \\textsf{${1:${VISUAL:text}}}${0}
 endsnippet
-context "document()"
 snippet rm "roman font text"
 \\textrm{${1:${VISUAL:text}}}${0}
 endsnippet
-context "document()"
 snippet tt "typewriter (monospace) text"
 \\texttt{${1:${VISUAL:text}}}${0}
 endsnippet
-context "document()"
 snippet tsub "subscripted text"
 \\textsubscript{${1:${VISUAL:text}}}${0}
 endsnippet
-context "document()"
 snippet tsup "superscripted text"
 \\textsuperscript{${1:${VISUAL:text}}}${0}
 endsnippet
 
 #misc
-context "document()"
 snippet ft "\footnote"
 \\footnote{${1:${VISUAL:text}}}${0}
 endsnippet
-context "document()"
 snippet fig "figure environment (includegraphics)"
 \\begin{figure}
 \\begin{center}
@@ -388,7 +328,6 @@ snippet fig "figure environment (includegraphics)"
 \\end{figure}
 ${0}
 endsnippet
-context "document()"
 snippet tik "figure environment (tikzpicture)"
 \\begin{figure}[htpb]
 \\begin{center}
@@ -401,7 +340,6 @@ ${2}
 \\end{figure}
 ${0}
 endsnippet
-context "document()"
 snippet subfig "subfigure environment"
 \\begin{subfigure}[${1}]{${2:\\textwidth}}
 \\begin{center}
@@ -412,7 +350,6 @@ ${3}
 \\end{subfigure}
 ${0}
 endsnippet
-context "document()"
 snippet tikcd "tikzcd environment in equation"
 \\begin{equation}
 \\begin{tikzcd}
@@ -421,7 +358,6 @@ ${1}
 \\end{equation}
 ${0}
 endsnippet
-context "document()"
 snippet tikzcd* "tikzcd environment in equation*"
 \\begin{equation*}
 \\begin{tikzcd}
@@ -431,7 +367,6 @@ ${1}
 ${0}
 endsnippet
 
-context "document()"
 snippet frame "frame environment"
 \\begin{frame}[${1:t}]
 \frametitle{${2:title}}
@@ -439,29 +374,24 @@ snippet frame "frame environment"
 ${0:${VISUAL}}
 \\end{frame}
 endsnippet
-context "document()"
 snippet block "block environment"
 \\begin{block}{${1:title}}
 ${0:${VISUAL}}
 \\end{block}
 endsnippet
-context "document()"
 snippet alert "alert text"
 \\alert{${1:${VISUAL:text}}} ${0}
 endsnippet
-context "document()"
 snippet alertblock "alertblock environment"
 \\begin{alertblock}{${1:title}}
 ${0:${VISUAL}}
 \\end{alertblock}
 endsnippet
-context "document()"
 snippet example "exampleblock environment"
 \\begin{exampleblock}{${1:title}}
 ${0:${VISUAL}}
 \\end{exampleblock}
 endsnippet
-context "document()"
 snippet col2 "two-column environment"
 \\begin{columns}
 \\begin{column}{0.5\\textwidth}
@@ -472,7 +402,6 @@ ${0}
 \\end{column}
 \\end{columns}
 endsnippet
-context "document()"
 snippet multicol2 "two-column environment with multicol"
 \\begin{multicols}{2}
 ${1}
@@ -480,49 +409,39 @@ ${1}
 ${0}
 \\end{multicols}
 endsnippet
-context "document()"
 snippet lst "code listings"
 \\begin{listing}[language=${1:language}]
 ${0:${VISUAL}}
 \\end{listing}
 endsnippet
-context "document()"
 snippet lsi
 \\lstinline|${1}| ${0}
 endsnippet
-context "document()"
 snippet incg "includegraphics" w
 \\includegraphics${2:[$3]}{$1}
 endsnippet
 
 #Hyperlinks
-context "document()"
 snippet url "url"
 \\url{${1}} ${0}
 endsnippet
-context "document()"
 snippet href "href"
 \\href{${1}}{${2}} ${0}
 endsnippet
-context "document()"
 snippet urlc "URL from clipboard"
 \\url{`@+`} ${0}
 endsnippet
-context "document()"
 snippet hrefc "href from clipboard"
 \\href{`@+`}{${1}} ${0}
 endsnippet
-context "document()"
 snippet enq "enquote {csquotes}"
 \\enquote{${1:${VISUAL:text}}} ${0}
 endsnippet
-context "document()"
 snippet ht "hypertarget" 
-\\hypertarget{${1:label_it}}{${2:text}}
+\\hypertarget{${1:label_it}}{${2:${VISUAL}}}
 endsnippet
-context "document()"
 snippet hl "hyperlink" 
-\\hyperlink{${1:label_of?}}{${2:text}}
+\\hyperlink{${1:label_of?}}{${2:${VISUAL}}}
 endsnippet
 
 global !p

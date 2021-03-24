@@ -111,3 +111,7 @@ source $ZSH/oh-my-zsh.sh
  alias vis="vim --servername"
  alias yi="echo \"To download video with youtube-dl...\" && echo \"Enter the link of the video:\" && read && vurl=\$REPLY && youtube-dl -F \$vurl && echo \"Enter option in the format %video+%audio\" && read && youtube-dl -f \$REPLY \$vurl"
  alias muvi="cd /mnt/Data/Videos/Music\ Videos/"
+ alias ltx="cd /mnt/Data/Documents/Latex"
+ alias ltxm="cd /mnt/Data/Documents/Latex/Miscellaneous"
+ alias ltxc="cd /mnt/Data/Documents/Latex/CMI\ coursework"
+ alias ltxu="cd /mnt/Data/Documents/Latex/useless"

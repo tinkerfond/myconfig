@@ -1,20 +1,28 @@
 swipe:
   3: 
     left: 
-      command: 'xdotool key super+Shift+h'
+      command: 'xdotool key super+Control+h'
+      keypress:
+          LEFTSHIFT: 'xdotool key super+shift+h'
     right: 
-      command: 'xdotool key super+Shift+l'
+      command: 'xdotool key super+Control+l'
+      keypress:
+          LEFTSHIFT: 'xdotool key super+shift+l'
     up: 
-      command: 'xdotool key super+Shift+k'
+      command: 'xdotool key super+Control+k'
+      keypress:
+          LEFTSHIFT: 'xdotool key super+shift+k'
     down: 
-      command: 'xdotool key super+Shift+j'
+      command: 'xdotool key super+Control+j'
+      keypress:
+          LEFTSHIFT: 'xdotool key super+shift+j'
   4:
     left: 
       command: 'xdotool key super+Right'
     right: 
       command: 'xdotool key super+Left'
     up: 
-      command: 'xdotool key super+Down'
+      command: 'xdotool key super+f'
     down: 
       command: 'xdotool key super+Up'
 pinch:

@@ -8,6 +8,9 @@ set cul
 set spell
 set clipboard=unnamed
 set noswapfile
+set indentexpr=
+
+
 
 set backspace=indent,eol,start
 
@@ -19,6 +22,10 @@ map <C-k> <Esc>klv$yhjpi
 
 "Refresh UltiSnips snippets and $MYVIMRC
 map <F12> : call UltiSnips#RefreshSnippets() <bar> : source $MYVIMRC <Enter>
+"VimtexCompile
+map <F3>  :VimtexCompile<Enter>
+"VimtexErrors TODO
+"map <F10> : |if (&filetype=='tex')| VimtexErrors | else | q | endif
 
 "Correct Spelling Mistakes
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
@@ -44,6 +51,10 @@ call plug#begin()
 Plug 'https://github.com/mg979/vim-visual-multi.git'
 Plug 'https://github.com/preservim/nerdtree.git'
 Plug 'https://github.com/lervag/vimtex.git'
+augroup MyVimtex
+  autocmd!
+  autocmd User VimtexEventQuit call vimtex#latexmk#clean(0)
+augroup END
     let g:tex_indent_brace=0
     let g:tex_flavor='latex'
     let g:vimtex_view_method='zathura'
@@ -60,7 +71,7 @@ Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'https://github.com/wincent/terminus.git'
 
 Plug 'https://github.com/KeitaNakamura/tex-conceal.vim.git'
-    let g:tex_conceal="ab mg"
+    let g:tex_conceal="abmg"
 Plug 'https://github.com/matze/vim-tex-fold.git'
 
 Plug 'https://github.com/KeitaNakamura/neodark.vim.git'
