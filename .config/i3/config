@@ -27,7 +27,7 @@ font pango:monospace 12
 # font, it doesn’t scale on retina/hidpi displays.
 
 #Startup
-exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113
+exec --no-startup-id synclient Verttwofingerscroll=1 Horiztwofingerscroll=1 VertScrollDelta=-113 HorizScrollDelta=-113
 exec --no-startup-id fusuma -c ~/.config/fusuma/config_i3.yml
 
 
