@@ -104,6 +104,10 @@ snippet thf "therefore" wA
 \\therefore $0
 endsnippet
 context "math()"
+snippet bec "because" wA
+\\because $0
+endsnippet
+context "math()"
 snippet imp "Implies" wA
 \\implies $0
 endsnippet
@@ -184,7 +188,7 @@ snippet vee "vee" wA
 \\vee $0
 endsnippet
 context "math()"
-snippet inf "Infinity" wA
+snippet iny "Infinity" wA
 \\infty $0
 endsnippet
 
@@ -208,12 +212,22 @@ endsnippet
 context "math()"
 post_jump "dynamicsnippet(snip)"
 snippet `([2-9])?pli` "Finite Paranthesis list" rwA
-`!p snip.rv="("+cexp(match.group(1))+") $0" if match.group(1)!=None else "($1, $2) $0"`
+`!p 
+if snip.c=='':
+ if match.group(1)==None:
+  snip.rv="($1, $2) $0"
+ else:
+  snip.rv="("+cexp(match.group(1))+") $0"`
 endsnippet
 context "math()"
 post_jump "dynamicsnippet(snip)"
 snippet `([2-9])?sli` "Finite Square bracket list" rwA
-`!p snip.rv="["+cexp(match.group(1))+"] $0" if match.group(1)!=None else "($1, $2) $0`
+`!p 
+if snip.c=='':
+ if match.group(1)==None:
+  snip.rv="[$1, $2] $0"
+ else:
+  snip.rv="["+cexp(match.group(1))+"] $0"`
 endsnippet
 context "math()"
 snippet comp "Compliment" wA
@@ -317,9 +331,9 @@ snippet `([a-zA-Z])?vec` "vec" rwA
 \\vec`!p  
 if snip.c=='':
  if match.group(1)!=None:
-  snip.rv="{"+match.group(1)+"}"+f" $0"
+  snip.rv="{"+match.group(1)+"}"+" $0"
  elif match.group(1)!='\\':
-  snip.rv="{"+f"$1"+"}"+f" $0"`
+  snip.rv="{"+"$1"+"}"+" $0"`
 endsnippet 
 post_jump "dynamicsnippet(snip)"
 context "math()"
@@ -327,9 +341,9 @@ snippet `([a-zA-Z])?hat` "hat" rwA
 \\hat`!p
 if snip.c=='':
  if match.group(1)!=None:
-  snip.rv="{"+match.group(1)+"}"+f" $0"
+  snip.rv="{"+match.group(1)+"}"+" $0"
  else:
-  snip.rv="{"+f"$1"+"}"+f" $0"`
+  snip.rv="{"+"$1"+"}"+" $0"`
 endsnippet
 post_jump "dynamicsnippet(snip)"
 context "math()"
@@ -337,9 +351,9 @@ snippet `([a-zA-Z])?bar` "bar" rwA
 \\bar`!p
 if snip.c=='':
  if match.group(1)!=None:
-  snip.rv="{"+match.group(1)+"}"+f" $0"
+  snip.rv="{"+match.group(1)+"}"+" $0"
  else:
-  snip.rv="{"+f"$1"+"}"+f" $0"`
+  snip.rv="{"+"$1"+"}"+" $0"`
 endsnippet
 post_jump "dynamicsnippet(snip)"
 context "math()"
@@ -347,9 +361,9 @@ snippet `([a-zA-Z])?til` "tilde" rwA
 \\tilde`!p
 if snip.c=='':
  if match.group(1)!=None:
-  snip.rv="{"+match.group(1)+"}"+f" $0"
+  snip.rv="{"+match.group(1)+"}"+" $0"
  else:
-  snip.rv="{"+f"$1"+"}"+f" $0"`
+  snip.rv="{"+"$1"+"}"+" $0"`
 endsnippet
 
 #Math fonts
@@ -660,6 +674,14 @@ endsnippet
 
 #Functions,Operators
 context "math()"
+snippet sup "Supremum" wA
+\\sup_{${1}} ${0}
+endsnippet
+context "math()"
+snippet inf "Infimum" wA
+\\inf_{${1}} ${0}
+endsnippet
+context "math()"
 snippet sur "surd" wA
 \\surd $0
 endsnippet
@@ -921,6 +943,7 @@ def cexp(n):
   out+=f"${i}, "
   i+=1
  return out[:-2]
+
 def findSum(str1): 
   
     # A temporary str1ing 
