@@ -45,7 +45,7 @@ scriptencoding utf-8
 set conceallevel=2
 
 "Shows the corresponding line in PDF
-noremap <silent> <F9> :VimtexView<Enter>
+noremap <F9> :VimtexView<Enter>
 
 call plug#begin()
 Plug 'https://github.com/mg979/vim-visual-multi.git'
