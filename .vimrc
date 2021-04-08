@@ -53,7 +53,7 @@ Plug 'https://github.com/preservim/nerdtree.git'
 Plug 'https://github.com/lervag/vimtex.git'
 augroup MyVimtex
   autocmd!
-  autocmd User VimtexEventQuit call vimtex#latexmk#clean(0)
+  autocmd User VimtexEventQuit call vimtex#compiler#clean(0)
 augroup END
     let g:tex_indent_brace=0
     let g:tex_flavor='latex'
