@@ -369,6 +369,16 @@ if snip.c=='':
  else:
   snip.rv="{"+"$1"+"}"+" $0"`
 endsnippet
+post_jump "dynamicsnippet(snip)"
+context "math()"
+snippet `([a-zA-Z])?oot` "dot" rwA
+\\dot`!p
+if snip.c=='':
+ if match.group(1)!=None:
+  snip.rv="{"+match.group(1)+"}"+" $0"
+ else:
+  snip.rv="{"+"$1"+"}"+" $0"`
+endsnippet
 
 #Math fonts
 context "math()"
