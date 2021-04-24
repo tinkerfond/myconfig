@@ -51,10 +51,25 @@ call plug#begin()
 Plug 'https://github.com/mg979/vim-visual-multi.git'
 Plug 'https://github.com/preservim/nerdtree.git'
 Plug 'https://github.com/lervag/vimtex.git'
-augroup MyVimtex
-  autocmd!
-  autocmd User VimtexEventQuit call vimtex#compiler#clean(0)
-augroup END
+"Compile upon opening, and cleanup upon closing
+ augroup MyVimtex
+   au!
+   au User VimtexEventQuit call vimtex#compiler#clean(0)
+   au User VimtexEventInitPost call vimtex#compiler#compile()
+ augroup END
+" Close viewers when VimTeX buffers are closed
+ function! CloseViewers()
+" Close viewers on quit
+ if executable('xdotool') && exists('b:vimtex')
+ \ && exists('b:vimtex.viewer') && b:vimtex.viewer.xwin_id > 0
+ call system('xdotool windowclose '. b:vimtex.viewer.xwin_id)
+ endif
+ endfunction
+ augroup vimtex_event_2
+ au!
+ au User VimtexEventQuit call CloseViewers()
+ augroup END
+
     let g:tex_indent_brace=0
     let g:tex_flavor='latex'
     let g:vimtex_view_method='zathura'
