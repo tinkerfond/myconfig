@@ -54,8 +54,9 @@ Plug 'https://github.com/lervag/vimtex.git'
 "Compile upon opening, and cleanup upon closing
  augroup MyVimtex
    au!
-   au User VimtexEventQuit call vimtex#compiler#clean(0)
-   au User VimtexEventInitPost call vimtex#compiler#compile()
+   au User VimtexEventQuit silent call vimtex#compiler#clean(0)
+   au User VimtexEventQuit silent call CloseViewers()
+   au User VimtexEventInitPost silent call vimtex#compiler#compile()
  augroup END
 " Close viewers when VimTeX buffers are closed
  function! CloseViewers()
@@ -65,10 +66,6 @@ Plug 'https://github.com/lervag/vimtex.git'
  call system('xdotool windowclose '. b:vimtex.viewer.xwin_id)
  endif
  endfunction
- augroup vimtex_event_2
- au!
- au User VimtexEventQuit call CloseViewers()
- augroup END
 
     let g:tex_indent_brace=0
     let g:tex_flavor='latex'
