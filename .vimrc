@@ -31,6 +31,7 @@ map <F3>  :VimtexCompile<Enter>
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 "Inkscape
+"Note: 'xcolor' and 'import' packages in LaTeX are required
 inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 
@@ -78,7 +79,7 @@ Plug 'https://github.com/SirVer/ultisnips.git'
     let g:UltiSnipsJumpForwardTrigger="<tab>"
     let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-"Plug 'https://github.com/honza/vim-snippets.git'
+Plug 'https://github.com/honza/vim-snippets.git'
 
 Plug 'https://github.com/wincent/terminus.git'
 
@@ -103,6 +104,8 @@ Plug 'https://github.com/pandysong/ghost-text.vim.git'
 
 Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
+
+"Plug 'mattn/emmet-vim'
 
 call plug#end()
 "Theme

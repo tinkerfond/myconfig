@@ -21,6 +21,13 @@ snippet `^templ` "Template" rm
 \\usepackage[bookmarksnumbered,colorlinks]{hyperref}
 %\\usepackage{blindtext}
 
+%For Inkscape PDF+LaTeX
+%\\usepackage{xcolor}
+%\\usepackage{import}
+%\newcommand{\incfig}[2][1]{%
+%    \def\svgwidth{#1\columnwidth}
+%    \import{./figures/}{#2.pdf_tex}}
+
 \\usepackage{geometry}
 \\geometry{a4paper, portrait, margin=1.37in}
 
@@ -51,6 +58,7 @@ snippet `^templ` "Template" rm
 
 \\begin{document}
 \\maketitle
+%\\tableofcontents
 
 $4
 \\end{document}

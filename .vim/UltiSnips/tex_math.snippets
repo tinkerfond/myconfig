@@ -46,6 +46,10 @@ endsnippet
 
 #Math relations
 context "math()"
+snippet cg "congruent" wA
+\\cong $0
+endsnippet
+context "math()"
 snippet eqv "equivalent" wA
 \\equiv $0
 endsnippet
@@ -644,8 +648,12 @@ snippet lrc "lceil rceil" wA
 \\left\\lceil ${1:${VISUAL}} \\right\\rceil $0
 endsnippet
 context "math()"
-snippet lrf "lflooe rfloor" wA
+snippet lrf "lfloor rfloor" wA
 \\left\\lfloor ${1:${VISUAL}} \\right\\rfloor $0
+endsnippet
+context "math()"
+snippet norm "norm" wA
+\\left\\lVert ${1:${VISUAL}} \\right\\rVert $0
 endsnippet
 
 # Arrows
@@ -696,6 +704,10 @@ endsnippet
 
 #Functions,Operators
 context "math()"
+snippet ln "ln function" wA
+\\ln{ ${1:${VISUAL}} } $0
+endsnippet
+context "math()"
 snippet sup "Supremum" wA
 \\sup_{${1}} ${0}
 endsnippet
@@ -709,7 +721,7 @@ snippet sur "surd" wA
 endsnippet
 context "math()"
 snippet sq "Square root" wA
-\\sqrt{$1} $0
+\\sqrt{${1:${VISUAL}} $0
 endsnippet
 context "math()"
 snippet nsq "nsq" wA
