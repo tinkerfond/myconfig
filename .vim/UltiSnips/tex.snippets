@@ -193,22 +193,22 @@ snippet sec* "\section*"
 ${0}
 endsnippet
 # Sub Section
-snippet sub "\subsection"
+snippet ssec "\subsection"
 \\subsection{${1:subsection name}}%$2
 ${0}
 endsnippet
 # Sub Section without number
-snippet sub* "\subsection*"
+snippet ssec* "\subsection*"
 \\subsection*{${1:subsection name}}%$2
 ${0}
 endsnippet
 # Sub Sub Section
-snippet ssub "\subsubsection"
+snippet sssec "\subsubsection"
 \\subsubsection{${1:subsubsection name}}%$2
 ${0}
 endsnippet
 # Sub Sub Section without number
-snippet ssub* "\subsubsection*"
+snippet sssec* "\subsubsection*"
 \\subsubsection*{${1:subsubsection name}}%$2
 ${0}
 endsnippet
@@ -266,7 +266,7 @@ snippet citet "\citet"
 \\citet{${1}} ${0}
 endsnippet
 snippet cite "\cite[]{}"
-\\cite[${1}]{${2}} ${0}
+\\cite{${1}} ${0}
 endsnippet
 snippet citea "\citeauthor"
 \\citeauthor{${1}} ${0}
@@ -423,7 +423,7 @@ endsnippet
 
 #Hyperlinks
 snippet url "url"
-\\url{${1}} ${0}
+\\url{${1:${VISUAL}}} ${0}
 endsnippet
 snippet href "href"
 \\href{${1}}{${2}} ${0}
