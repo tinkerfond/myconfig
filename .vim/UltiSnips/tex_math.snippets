@@ -207,8 +207,13 @@ context "math()"
 snippet iny "Infinity" wA
 \\infty $0
 endsnippet
+context "math()"
+snippet vt "Vertical line" wA
+\\vert_{$1} $0
+endsnippet
 
-# Set Theoretic Symbols
+
+# Set Theoretic objects
 context "math()"
 snippet set "Set builder notation" wA
 \\{ $1 \\mid $2 \\} $0
@@ -233,7 +238,7 @@ if snip.c=='':
  if match.group(1)==None:
   snip.rv="($1, $2) $0"
  else:
-  snip.rv="("+cexp(match.group(1))+") $0"`
+  snip.rv="("+cexp(match.group(1),",")+") $0"`
 endsnippet
 context "math()"
 post_jump "dynamicsnippet(snip)"
@@ -243,7 +248,7 @@ if snip.c=='':
  if match.group(1)==None:
   snip.rv="[$1, $2] $0"
  else:
-  snip.rv="["+cexp(match.group(1))+"] $0"`
+  snip.rv="["+cexp(match.group(1),",")+"] $0"`
 endsnippet
 context "math()"
 snippet comp "Compliment" wA
@@ -288,6 +293,42 @@ endsnippet
 context "math()"
 snippet nin "not in" wA
 \\ni $0
+endsnippet
+context "math()"
+snippet nu "Null set" wA
+\\varnothing $0
+endsnippet
+context "math()"
+snippet seq "sequence" wA
+\\langle ${1:x}_${2:k} \\rangle_{$2 \\in \\mathbb{N}} $0
+endsnippet
+context "math()"
+snippet col "collection" wA
+\\{ $1_{$2} \\}_{${2:\\alpha} \in ${3:I}} $0
+endsnippet
+
+#Category Theoretic objects
+context "math()"
+snippet sxs "short exact sequence" wA
+0 \\xrightarrow{$2} ${1:A} \\xrightarrow{$4} ${3:B} \\xrightarrow{$6} ${5:C} \\xrightarrow{$7} 0 $0
+endsnippet
+post_jump "dynamicsnippet(snip)"
+context "math()"
+snippet `([3-9])xs` "exact sequence" rwA
+`!p 
+if snip.c=='':
+ if match.group(1)==None:
+  snip.rv="[$1, $2] $0"
+ else:
+  string=f"${1}"
+  i=2
+  f=2*int(match.group(1))-2
+  for placeholder in range(i,f):
+   if placeholder%2==0:
+    string+= " \\xrightarrow{"+f"${placeholder+1}"+"}"
+   else:
+    string+= f" ${placeholder-1}"
+ snip.rv=string+" $0"`
 endsnippet
 
 #Textformatting
@@ -440,11 +481,11 @@ snippet mbb "mathbb" wA
 \\mathbb{${1:${VISUAL:text}}}${0}
 endsnippet
 context "math()"
-snippet mbf "mathbf" w
+snippet mbf "mathbf" wA
 \\mathbf{${1:${VISUAL:text}}}${0}
 endsnippet
 context "math()"
-snippet mbs "math boldsymbol" w
+snippet mbs "math boldsymbol" wA
 \\boldsymbol{${1:${VISUAL:text}}}${0}
 endsnippet
 
@@ -658,6 +699,14 @@ endsnippet
 
 # Arrows
 context "math()"
+snippet mt "mapsto" wA
+\\mapsto $0
+endsnippet
+context "math()"
+snippet lmt "longmapsto" wA
+\\longmapsto $0
+endsnippet
+context "math()"
 snippet rar "Right arrow" wA
 \\rightarrow $0
 endsnippet
@@ -698,9 +747,27 @@ snippet dar "Down arrow" wA
 \\downarrow $0
 endsnippet
 context "math()"
-snippet upar "Up down arrow" wA
+snippet udar "Up down arrow" wA
 \\updownarrow $0
 endsnippet
+#Doublearrows
+context "math()"
+snippet lrad "leftrightarrows" wA
+\\leftrightarrows $0
+endsnippet
+context "math()"
+snippet rlad "rightleftarrows" wA
+\\rightlefttarrows $0
+endsnippet
+context "math()"
+snippet rrad "rightrightarrows" wA
+\\rightrightarrows $0
+endsnippet
+context "math()"
+snippet llad "leftleftarrows" wA
+\\leftleftarrows $0
+endsnippet
+
 
 #Functions,Operators
 context "math()"
@@ -970,11 +1037,11 @@ def pol_gen(n,xval):
 	# Expand anonymous snippet
 	#snip.expand_anon(anon_snippet_body)
 # For pli and cli
-def cexp(n):
+def cexp(n,symb):
  out=""
  i=1
  for _ in range(int(n)):
-  out+=f"${i}, "
+  out+=f"${i}"+symb+" "
   i+=1
  return out[:-2]
 
