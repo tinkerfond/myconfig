@@ -330,6 +330,15 @@ if snip.c=='':
     string+= f" ${placeholder-1}"
  snip.rv=string+" $0"`
 endsnippet
+context "math()"
+snippet 4com "commutative diagram 4 objects" wA
+\\begin{tikzcd}[row sep=large,column sep=huge]
+${1} \\arrow{r}{$5} \\arrow{d}{$7}
+& ${2} \arrow{d}{$8} \\\\
+${3} \\arrow{r}{$6}
+& ${4}
+\\end{tikzcd}
+endsnippet
 
 #Textformatting
 context "math()"
@@ -821,6 +830,22 @@ endsnippet
 context "math()"
 snippet lim "\lim_{}" wA
 \\lim_{ ${1} \\to ${2} } ${0}
+endsnippet
+context "math()"
+snippet dlim "direct limit" wA
+\\varinjlim $0
+endsnippet
+context "math()"
+snippet clim "inverse limit" wA
+\\varprojlim $0
+endsnippet
+context "math()"
+snippet ulim "inverse limit" wA
+\\varlimsup $0
+endsnippet
+context "math()"
+snippet ilim "inverse limit" wA
+\\varliminf $0
 endsnippet
 context "math()"
 snippet fun "function" wA
