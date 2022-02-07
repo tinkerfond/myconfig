@@ -95,11 +95,11 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
+
 # Example aliases
  alias ohmyzsh="cd ~/.oh-my-zsh"
- alias yf="youtube-dl -f"
- alias yF="youtube-dl -F"
+ alias yf="yt-dlp -f"
+ alias yF="yt-dlp -F"
  alias xg="xgamma -gamma"
  alias myconfig="cd ~/myconfig"
  alias usnip="cd ~/.vim/UltiSnips"
@@ -109,7 +109,7 @@ source $ZSH/oh-my-zsh.sh
  alias vimrc="vim ~/.vimrc"
  alias zshrc="vim ~/.zshrc"
  alias vis="vim --servername"
- alias yi="echo \"To download video with youtube-dl...\" && echo \"Enter the link of the video:\" && read && vurl=\$REPLY && youtube-dl -F \$vurl && echo \"Enter option in the format %video+%audio\" && read && youtube-dl -f \$REPLY \$vurl"
+ alias yi="echo \"To download video with yt-dlp...\" && echo \"Enter the link of the video:\" && read && vurl=\$REPLY && yt-dlp -F \$vurl && echo \"Enter option in the format %video+%audio or any individual option\" && read && yt-dlp -f \$REPLY \$vurl"
  alias muvi="cd /mnt/Data/Videos/Music\ Videos/"
  alias ltx="cd /mnt/Data/Documents/Latex"
  alias ltxm="cd /mnt/Data/Documents/Latex/Miscellaneous"
