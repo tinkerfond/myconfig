@@ -116,3 +116,4 @@ source $ZSH/oh-my-zsh.sh
  alias ltxc="cd /mnt/Data/Documents/Latex/CMI\ coursework"
  alias ltxu="cd /mnt/Data/Documents/Latex/useless"
  alias xc="xclip -sel clip <"
+ alias sai="sudo apt install"
