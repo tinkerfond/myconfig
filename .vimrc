@@ -51,6 +51,7 @@ noremap <F9> :VimtexView<Enter>
 call plug#begin()
 Plug 'https://github.com/mg979/vim-visual-multi.git'
 Plug 'https://github.com/preservim/nerdtree.git'
+Plug 'https://github.com/jceb/vim-orgmode'
 Plug 'https://github.com/lervag/vimtex.git'
 "Compile upon opening, and cleanup upon closing
  augroup MyVimtex
