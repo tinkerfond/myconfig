@@ -117,3 +117,4 @@ source $ZSH/oh-my-zsh.sh
  alias ltxu="cd /mnt/R\&D/Documents/Latex/useless"
  alias xc="xclip -sel clip <"
  alias sai="sudo apt install"
+ alias sau="sudo apt update"
