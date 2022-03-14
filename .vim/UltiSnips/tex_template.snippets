@@ -78,8 +78,8 @@ snippet `^cmiart` "CMI article template" rm
 
 \\usepackage[final]{graphicx}
 
-\\title{\\vspace{-40mm}\\huge{*Assignment*} \\vspace{0.7mm}\\\\ \\Huge{*Course Name*}\\\\ \\vspace{4mm} \\includegraphics[scale=0.55]{cmi}\\vspace{-1.7mm}} \\author{Prasanna Venkatesan.P\\\\BMP201904}
-\\date{*Date*}
+\\title{\\vspace{-40mm}\\huge{${1:*Article Type*}} \\vspace{0.7mm}\\\\ \\Huge{${2:*Course Name*}}\\\\ \\vspace{4mm} \\includegraphics[scale=0.55]{cmi}\\vspace{-1.7mm}} \\author{Prasanna Venkatesan.P\\\\BMP201904}
+\\date{${3:*Date*}}
 
 \\renewcommand{\\qed}{}
 
@@ -90,6 +90,8 @@ snippet `^cmiart` "CMI article template" rm
 
 \\begin{document}
 \\maketitle
+
+$0
 
 \\end{document}
 endsnippet
