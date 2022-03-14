@@ -64,3 +64,32 @@ $4
 \\end{document}
 endsnippet
 
+snippet `^cmiart` "CMI article template" rm
+\\documentclass[a4paper]{article}
+\\usepackage{amsmath}
+\\usepackage{amssymb}
+\\usepackage{breqn}
+\\usepackage{mathrsfs}
+\\usepackage{amsthm}
+\\usepackage[bookmarksnumbered,colorlinks]{hyperref}
+\\usepackage{csquotes}
+\\usepackage{xcolor} 
+\\usepackage{import} 
+
+\\usepackage[final]{graphicx}
+
+\\title{\\vspace{-40mm}\\huge{*Assignment*} \\vspace{0.7mm}\\\\ \\Huge{*Course Name*}\\\\ \\vspace{4mm} \\includegraphics[scale=0.55]{cmi}\\vspace{-1.7mm}} \\author{Prasanna Venkatesan.P\\\\BMP201904}
+\\date{*Date*}
+
+\\renewcommand{\\qed}{}
+
+\\newtheorem{thm}{\\hypertarget{thm\\thethm}{Theorem}}[section]
+\\theoremstyle{definition}
+\\newtheorem{defn}{\\hypertarget{defn\\thedefn}{Definition}}[section]
+\\newtheorem{prop}{\\hypertarget{prop\\theprop}{Proposition}}[section]
+
+\\begin{document}
+\\maketitle
+
+\\end{document}
+endsnippet
