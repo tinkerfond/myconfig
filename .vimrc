@@ -9,9 +9,6 @@ set spell
 set clipboard=unnamed
 set noswapfile
 set indentexpr=
-
-
-
 set backspace=indent,eol,start
 
 "Previous line mirror after cursor
@@ -86,6 +83,9 @@ Plug 'https://github.com/wincent/terminus.git'
 
 Plug 'https://github.com/KeitaNakamura/tex-conceal.vim.git'
     let g:tex_conceal="abmg"
+    hi conceal ctermbg=NONE
+    hi Conceal guifg=NONE
+    hi Conceal guibg=NONE
 Plug 'https://github.com/matze/vim-tex-fold.git'
 
 Plug 'https://github.com/KeitaNakamura/neodark.vim.git'
@@ -105,14 +105,16 @@ Plug 'https://github.com/pandysong/ghost-text.vim.git'
 
 Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
+Plug 'https://github.com/flazz/vim-colorschemes'
 
 "Plug 'mattn/emmet-vim'
+
+"Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
 "Theme
 colorscheme neodark
 set background=dark
-hi conceal ctermbg=NONE
 
 function! SyncTexForward()
     let linenumber=line(".")
