@@ -872,9 +872,9 @@ snippet par "Partial" wA
 \\partial
 endsnippet
 context "math()"
-snippet `([dcg])?nab` "Nabla & variants" rwA
+snippet `([ndcgl])?ab` "Nabla & variants" rwA
 `!p 
-if match.group(1)==None:
+if match.group(1)=='n':
  snip.rv="\\nabla"
 elif match.group(1)=='d':
  snip.rv="\\nabla\\cdot"
@@ -882,7 +882,9 @@ elif match.group(1)=='c':
  snip.rv="\\vec{\\nabla}\\times"
 elif match.group(1)=='g':
  snip.rv="\\vec{\\nabla}"
-`{$1} $0
+elif match.group(1)=='l':
+ snip.rv="{\\nabla}^{2}"
+`{ $1 } $0
 endsnippet
 context "math()"
 snippet intp "Integral" wA
@@ -1101,7 +1103,10 @@ def printd(str2,str1):
   while i<len(str1)-1:
     if str1[i].isalpha():
      if str1[i+1].isdigit():
-      result = result +" "+ str2+" "+str1[i]+"^{"+str1[i+1]+"}"
+      if str1[i+1]==1:
+       result = result +" "+ str2+" "+str1[i]
+      else:
+       result = result +" "+ str2+" "+str1[i]+"^{"+str1[i+1]+"}"
      else:
       result=result+" "+ str2 +" "+str1[i]
     i=i+1 
