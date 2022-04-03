@@ -3,7 +3,7 @@ Vim,Zathura,LaTeX configuration files....
 
 ### Configurations for:
 1. `vim`
-2. neovim
+2. `neovim`
 3. `zathura`
 4. `texlive`
 5. `fusuma`
