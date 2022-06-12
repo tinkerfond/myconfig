@@ -13,6 +13,7 @@ set backspace=indent,eol,start
 
 "Previous line mirror after cursor
 map <C-k> <Esc>klv$yhjpi
+let mapleader = " "
 
 "Next line TeX
 "autocmd FileType tex imap <C-d> \\<CR>
@@ -48,7 +49,11 @@ noremap <F9> :VimtexView<Enter>
 call plug#begin()
 Plug 'https://github.com/mg979/vim-visual-multi.git'
 Plug 'https://github.com/preservim/nerdtree.git'
-Plug 'https://github.com/jceb/vim-orgmode'
+
+"Plug 'https://github.com/jceb/vim-orgmode'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-orgmode/orgmode'
+
 Plug 'https://github.com/lervag/vimtex.git'
 "Compile upon opening, and cleanup upon closing
  augroup MyVimtex
