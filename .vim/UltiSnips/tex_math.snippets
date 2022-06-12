@@ -971,6 +971,28 @@ snippet coti "arccot function" wA
 \\arccot{$1} $0
 endsnippet
 
+priority 90
+
+#Frequent Composites
+context "math()"
+snippet C "Complex Numbers" wA
+\\mathbb{C} $0
+endsnippet
+context "math()"
+snippet R "Real Numbers" wA
+\\mathbb{R} $0
+endsnippet
+context "math()"
+snippet Cfun "Complex Valued Function" wA
+{${1:f}: { ${2:\\mathbb{C}} \\to ${3:\\mathbb{C}} }} ${0}
+endsnippet
+context "math()"
+snippet Rfun "Real Valued Function" wA
+{${1:f}: { ${2:\\mathbb{R}} \\to ${3:\\mathbb{R}} }} ${0}
+endsnippet
+
+
+priority 80
 
 #TODO:Debug/Improve
 context "math()"
