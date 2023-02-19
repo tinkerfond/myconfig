@@ -339,6 +339,14 @@ ${3} \\arrow{r}{$6}
 & ${4}
 \\end{tikzcd}
 endsnippet
+context "math()"
+snippet ucom "Universal Object" wA
+\\begin{tikzcd}[row sep=large,column sep=huge]
+${1:A} \\arrow[r,"${4:f}"] \\arrow[rd,"${6:g}"]
+& ${2:B} \\arrow[d,dotted,"\exists! ${7:h}"]\\\\
+& ${3:C}
+\\end{tikzcd}
+endsnippet
 
 #Textformatting
 context "math()"
