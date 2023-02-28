@@ -11,7 +11,7 @@ endglobal
 
 # TODO: 1)Fix the bug in dynamic snippets: Different output on different iteration.
 #       2)Make fixminus() function work. Does post_jump work for every jump?
-#       3)Add snippets for \dot{} and \ddot{}, \amalg, dagger,star
+#       3)Add snippets for \dot{} and \ddot{}, \amalg,star
 #       4)Add iint and other related stuff
 
 priority 100
@@ -124,7 +124,7 @@ snippet iff "Biimplication / iff" wA
 \\iff $0
 endsnippet
 context "math()"
-snippet pm "plus minus" wA
+snippet plm "plus minus" wA
 \\pm $0
 endsnippet
 context "math()"
@@ -421,6 +421,16 @@ if snip.c=='':
 endsnippet
 post_jump "dynamicsnippet(snip)"
 context "math()"
+snippet `([a-zA-Z])?hv` "hat vec for quantum operator" rwA 
+\\hat{\\vec`!p  
+if snip.c=='':
+ if match.group(1)!=None:
+  snip.rv="{"+match.group(1)+"}}"+" $0"
+ elif match.group(1)!='\\':
+  snip.rv="{"+"$1"+"}}"+" $0"`
+endsnippet 
+post_jump "dynamicsnippet(snip)"
+context "math()"
 snippet `([a-zA-Z])?bar` "bar" rwA
 \\bar`!p
 if snip.c=='':
@@ -471,10 +481,49 @@ context "math()"
 snippet wp "wp" wA
 \\wp $0
 endsnippet
+
+#Physics notations
 context "math()"
-snippet hbar "hbar" wA
+snippet hb "hbar" wA
 \\hbar $0
 endsnippet
+context "math()"
+snippet ket "ket" wA
+\\ket{$1} $0
+endsnippet
+context "math()"
+snippet bra "bra" wA
+\\bra{$1} $0
+endsnippet
+context "math()"
+snippet bk "braket" wA
+\\braket{$1}{$2} $0
+endsnippet
+context "math()"
+snippet kb "ket bra" wA
+\\ketbra{$1}{$2} $0
+endsnippet
+context "math()"
+snippet exv "Expetaction Value" wA
+\\expval{${1:A}}{${2:\psi}}
+endsnippet
+context "math()"
+snippet me "Matrix Element" wA
+\\matrixel{$1}{$2}{$3} $0
+endsnippet
+context "math()"
+snippet cm "commutator" wA
+\\comm{$1}{$2} $0
+endsnippet
+context "math()"
+snippet pb "Poisson Bracket" wA
+\\pb{$1}{$2} $0
+endsnippet
+context "math()"
+snippet dg "dagger" wA
+\\dag $0
+endsnippet
+
 
 #Math fontmodes
 context "math()"
@@ -712,6 +761,10 @@ endsnippet
 context "math()"
 snippet norm "norm" wA
 \\left\\lVert ${1:${VISUAL}} \\right\\rVert $0
+endsnippet
+context "math()"
+snippet av "Absolute value" wA
+|$1| $0
 endsnippet
 
 # Arrows
@@ -980,7 +1033,6 @@ snippet coti "arccot function" wA
 endsnippet
 
 priority 90
-
 #Frequent Composites
 context "math()"
 snippet C "Complex Numbers" wA
